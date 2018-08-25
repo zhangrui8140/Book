@@ -1,2 +1,0 @@
-CZYDMSZ 摘要代码参数表
-DCJWLYS 场景往来映射表
