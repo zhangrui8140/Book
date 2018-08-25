@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<oltpConf oltpProject="com.csii.ccbs.dp.oltp" isOltpProject="com.csii.ccbs.lt.oltp" facadeProject="com.csii.ccbs.lt.facade" customGenServiceTypes="true" genServiceTypes="dubbo" version="1.1" module="dp" name="36001" package="com.csii.ccbs.dp" subPackage="eleaccounting" description="电子账户开户" serviceProject="com.csii.ccbs.dp.service" inputUseExistClass="false" outputUseExistClass="false" subModule="dp"> 
+  <input> 
+    <field name="vctype" type="String" desc="凭证种类"/>  
+    <field name="custac" type="String" desc="客户账号"/>  
+    <field name="prdcde" type="String" desc="产品代码"/>  
+    <field name="idtype" type="String" desc="证件种类"/>  
+    <field name="idtype" type="String" desc="证件种类"/>  
+    <field name="idinfo" type="String" desc="证件号码"/>  
+    <field name="custno" type="String" desc="客户号"/>  
+    <field name="acctnm" type="String" desc="账户名称"/>  
+    <field name="acctsq" type="String" desc="子账户序号"/>  
+    <field name="curccd" type="String" desc="货币代号"/>  
+    <field name="carefg" type="String" desc="钞汇标志"/>  
+    <field name="voucsq" type="String" desc="凭证序号"/>  
+    <field name="pamtcd" type="String" desc="支付条件"/>  
+    <field name="tranpw" type="String" desc="交易密码"/>  
+    <field name="pamqut" type="BigDecimal" desc="支付限额"/>  
+    <field name="actcd1" type="String" desc="账户分类码1"/>  
+    <field name="acterm" type="String" desc="账户存款期限"/>  
+    <field name="bidate" type="String" desc="起息日"/>  
+    <field name="yndaa1" type="String" desc="是否允许通兑"/>  
+    <field name="actcd2" type="String" desc="账户分类码2"/>  
+    <field name="track2" type="String" desc="磁道2信息"/>  
+    <field name="track3" type="String" desc="三磁道"/>  
+    <field name="voucbn" type="String" desc="凭证批号"/>  
+    <field name="ynflag" type="String" desc="是否标志"/>  
+    <field name="daabrg" type="String" desc="通兑范围"/>  
+    <field name="csecfg" type="String" desc="现金通兑标志"/>  
+    <field name="tpwafg" type="String" desc="转账通兑标志"/>  
+    <field name="agetps" type="String" desc="代理人"/>  
+    <field name="agpstp" type="String" desc="代理人证件种类"/>  
+    <field name="agpsid" type="String" desc="代理人证件号码"/>  
+    <field name="intrin" type="BigDecimal" desc="利率"/>  
+    <field name="matudt" type="String" desc="到期日期"/>  
+    <field name="bidtrg" type="String" desc="起息日规则"/>  
+    <field name="acinrt" type="BigDecimal" desc="实际利率"/>  
+    <field name="irdfmd" type="String" desc="利率定义方式"/>  
+    <field name="irfltp" type="String" desc="利率浮动类型"/>  
+    <field name="acinfv" type="BigDecimal" desc="账户利率浮动值"/>  
+    <field name="cdtpno" type="String" desc="卡类型"/>  
+    <field name="telpno" type="String" desc="电话号码"/>  
+    <field name="cuacno" type="String" desc="绑定卡号"/>  
+    <field name="voucst" type="String" desc="认证状态变更"/>  
+    <field name="opbkno" type="String" desc="绑定行号"/>  
+    <field name="opbknm" type="String" desc="绑定行名称"/>  
+    <field name="sgvcst" type="String" desc="激活状态变更"/>  
+    <field name="ylsjhm" type="String" desc="预留手机号码"/>  
+    <field name="recmno" type="String" desc="推荐人编号"/>  
+    <field name="recmnm" type="String" desc="推荐人名称"/>  
+    <field name="lsisog" type="String" desc="签发机关"/>  
+    <field name="isivdt" type="String" desc="签发日期"/>  
+    <field name="dabldt" type="String" desc="证件失效日期"/>  
+    <field name="f360011" type="List" ref="f360011" desc="绑定卡列表"/>  
+    <field name="btprfg" type="String" desc="是否批量处理"/> 
+  </input>  
+  <output> 
+    <field name="custac" type="String" desc="客户账号"/>  
+    <field name="custno" type="String" desc="客户号"/>  
+    <field name="acctsq" type="String" desc="子账户序号"/>  
+    <field name="acctnm" type="String" desc="账户名称"/>  
+    <field name="prdcde" type="String" desc="产品代码"/>  
+    <field name="pdinfo" type="String" desc="产品说明"/>  
+    <field name="sysact" type="String" desc="系统账号"/>  
+    <field name="curccd" type="String" desc="货币代号"/>  
+    <field name="carefg" type="String" desc="钞汇标志"/>  
+    <field name="daabrg" type="String" desc="通兑范围"/>  
+    <field name="actcd1" type="String" desc="账户分类码1"/>  
+    <field name="acterm" type="String" desc="账户存款期限"/>  
+    <field name="bidate" type="String" desc="起息日"/>  
+    <field name="trdpmd" type="String" desc="转存方式"/>  
+    <field name="rnterm" type="String" desc="续存存期"/>  
+    <field name="exprdt" type="String" desc="账户到期日"/>  
+    <field name="actcd2" type="String" desc="账户分类码2"/>  
+    <field name="trdate" type="String" desc="交易日期"/>  
+    <field name="tlersn" type="String" desc="柜员流水号码"/>  
+    <field name="opbkno" type="String" desc="开户行号"/>  
+    <field name="dpacct" type="String" desc="系统账号"/>  
+    <field name="cdcout" type="Long" desc="卡剩余数量"/>  
+    <field name="limino" type="Long" desc="警戒线卡数量"/>  
+    <field name="bkbjpl" type="Long" desc="补卡报警频率"/>  
+    <field name="bphone" type="String" desc="补卡短信通知手机号码"/> 
+  </output>  
+  <complexField> 
+    <field name="f360011" desc="绑定卡列表"> 
+      <field name="typefg" type="String" desc="本他行卡标志"/>  
+      <field name="cardno" type="String" desc="绑定卡号"/>  
+      <field name="itbkno" type="String" desc="绑定行号"/>  
+      <field name="banknm" type="String" desc="绑定行名称"/>  
+      <field name="ylsjhm" type="String" desc="预留手机号码"/>  
+      <field name="bfincd" type="String" desc="绑定行金融机构编码"/>  
+      <field name="opcdfg" type="String" desc="开户绑定卡标志"/> 
+    </field> 
+  </complexField> 
+</oltpConf>
+
+
+开户流程
+
+开户申请: 身份证  凭证 科目归属
+非批量开户: 有无客户信息 无建立客户信息
+
+负债账户信息表 ZCKZHZB
+负债账户利率定义 DCKZHLL
+负债账户余额 DCKYEXX
+以存抵贷计息明细登记簿 MYCDDJX
+负债账户冻结登记簿 DZHDJDJ 
+负债限制种类定义表 CCKXZZL
+冻结明细表 MCKDJMX
+负债账户计提定义 DCKZHJT
+负债组合产品一般属性定义表 CCKZHSX
+负债账户支取控制明细 MZQKZMX
+负债账户存入控制明细 MCRKZMX 
+负债模块系统参数定义表 CCKXTCS
+
+
+客户信息:
+对私客户信息表 ZDSKHZB    客户电话信息 DKHDHXX  
+客户证件信息 DKHZJXX      账号-客户号关系 DZHKHGX
+客户账号 DCKKHZH          绑定关联卡表  DBDPGLB
+客户账号对照表 DKHZHDZ    负债客户账号合一登记簿  DCKZHHY
+存款客户推荐人表 DKHTJRB
+
+卡信息:
+卡类型属性表 CKLXSXB  凭证信息文件A-卡 ZKPZXXB  
+卡密码关联表 ZKAJYMM
+
+产品信息:
+产品定义 CCPXXZB  负债产品到期定义 CCKDQCS  
+负债产品属性定义 CCKCPSX
+
+机构信息:
+机构参数表 CXTJGSZ  机构控制表 CXTJGKZ  机构关系表 CXTJGGX
+负债产品机构控制表  CCKJGCS 
+
+负债杂项参数表 CCKZXCS
+
+
+36001 
+建立客户信息
+i 根据客户号(custno) 查询对私客户信息表(ZDSKHZB)  
+ii 不存在客户 信息落库  客户证件信息(DKHZJXX)  客户电话信息(Dkhdhxx)  对私客户信息表(ZDSKHZB)
+    存在客户  身份认证  渠道认证(I08) 凭证信息文件A-卡(ZKPZXXB)
+iii 根据 绑定卡类型(cdtpno)  卡类型属性表(CKLXSXB)  检查客户持卡数量 凭证信息文件A-卡(ZKPZXXB)
+检查客户最大持卡数量(包括卡类型最大持卡数量) 
+iV 江西农信卡表(DJXNXKB) 获取电子账户卡号 //并发控制
+V 注册 检查客户账号(DCKKHZH)  登记客户账号的客户关系 账号-客户号关系(DZHKHGX)
+VI 开户 ...  插入凭证信息文件A-卡(ZKPZXXB) 绑定关联表(DBDPGLB) 存款客户推荐人表(DKHTJRB)
+VII 补全  客户证件信息(DKHZJXX)
+VIII 补卡信息
+
+
+
+--开户 删除用户信息 CUACNO  6226835500003458536 130022011001R0188301    CUSTNO 010000002001726
+
+DELETE FROM (SELECT * FROM ZCKZHZB where RLCUST='010000002001726' fetch first 1 row only );  --负债账户信息表
+DELETE FROM (SELECT * FROM DBDPGLB where CUACNO='130022011001R0188301' fetch first 1 row only );  --绑定关联表
+DELETE FROM (SELECT * FROM DKHZJXX where CUSTNO='010000002001726' fetch first 1 row only );  --客户证件信息
+DELETE FROM (SELECT * FROM DKHDHXX where CUSTNO='010000002001726' fetch first 1 row only );  --客户电话信息
+DELETE FROM (SELECT * FROM ZDSKHZB where CUSTNO='010000002001726' fetch first 1 row only );  --对私客户信息
+DELETE FROM (SELECT * FROM DZHKHGX where RLCUST='010000002001726' fetch first 1 row only );  --账号-客户号关系 ?
+DELETE FROM (SELECT * FROM DCKKHZH where CUSTNO='010000002001726' fetch first 1 row only );  --客户账号
+DELETE FROM (SELECT * FROM ZZHMKGX where CUSTNO='010000002001726' fetch first 1 row only );  --账号解析表
+DELETE FROM (SELECT * FROM ZKPZXXB where CUSTNO='010000002001726' fetch first 1 row only );  --凭证信息文件A-卡
+
+--查询开户信息
+
+SELECT * FROM ZCKZHZB where RLCUST='010000002001726' ; --负债账户信息表
+SELECT * FROM DBDPGLB where CUACNO='6226835500003458536'; --绑定关联表
+SELECT * FROM DKHZJXX where CUSTNO='010000002001726'; --客户证件信息
+SELECT * FROM DKHDHXX where CUSTNO='010000002001726'; --客户电话信息
+SELECT * FROM ZDSKHZB where CUSTNO='010000002001726'; --对私客户信息
+SELECT * FROM DZHKHGX where RLCUST='010000002001726'; --账号-客户号关系 ?
+SELECT * FROM DCKKHZH where CUSTNO='010000002001726'; --客户账号
+SELECT * FROM ZZHMKGX where CUSTNO='010000002001726'; --账号解析表
+SELECT * FROM ZKPZXXB where CUSTNO='010000002001726'; --凭证信息文件A-卡
+
+
+
+SELECT * FROM DCKZHXH; --开智能存款 客户账号序号表  CUACCD
+SELECT * FROM CXHCSZB; --序号参数表
+SELECT * FROM MCKJTMX; --计提明细 DPACCT
+SELECT * FROM DCKDQXC; --负债账户续存定义  DPACCT
+SELECT * FROM DBDPGLB; --绑定关联表  CUACNO
+SELECT * FROM DKHZJXX; --客户证件信息
+SELECT * FROM DKHDHXX; --客户电话信息
+SELECT * FROM ZDSKHZB; --对私客户信息
+SELECT * FROM DZHKHGX; --账号-客户号关系
+SELECT * FROM DCKKHZH; --客户账号
+SELECT * FROM ZZHMKGX; --账号解析表
+SELECT * FROM ZCKZHZB; --负债账户信息表
+SELECT * FROM DCKZHLL; --负债账户利率定义
+SELECT * FROM DCKZHJT; --负债账户计提定义
+SELECT * FROM DCKZQSZ; --负债账户支取控制设定
+SELECT * FROM DCKYZSX; --负债账户约定转账属性定义
+SELECT * FROM DCKBCZL; --负债账户补充资料登记表
+SELECT * FROM DKHZHDZ; --客户账号对照表
+SELECT * FROM ZKPZXXB; --凭证信息文件A-卡
+SELECT * FROM ZKAJYMM; --卡密码关联表
+SELECT * FROM DJXNXYZ; --江西农信移植
+select * from czydmsz --摘要代码表
+
+
+    交易号 模块  描述
+@   36001   dp  电子账户开户      
+    36002   dp  电子账户信息查询
+    36004   dp  电子账户绑定卡维护
+    36006   dp  电子账户转账
+    36007   dp  电子账户资金转出
+    36008   dp  电子账户资金转入
+    36009   dp  充值
+    36010   dp  提现
+    36014   dp  电子账户销户
+    36019   dp  电子账户能否入账查询
+    36021   dp  冻结/控制查询
+    36024   dp  账户控制及维护 
+    36025   dp  根据前台日期和流水查冻结编号和业务委托号
+    36026   dp  电子账户机构确定
+    36027   dp  不动户转正常户
+    36028   dp  账户可冻余额查询 
+    36029   dp  影像留存标记生效
+    36043   dp  理财资金归集申请
+    36045   dp  理财兑付申请
+    36050   dp  电子账户交易额度查询
+    36060   dp  电子账户充值并冻结
+    36061   dp  电子账户解冻并提现
+    36062   dp  电子账户资金转入并冻结    
+    36063   dp  电子账户解冻并资金转出    理财归集
+    36064   dp  一记双讫(红蓝字),江西专用
+    36065   dp  日终切日往来结转
+    36066   dp  往来2号户划账核心款项
+    36067   dp  换日结果查询
+    36071   dp  电子账户交易历史查询
+    36081   dp  江西农信月度统计
+    36209   dp  联机对账申请
+    36210   dp  联机对账文件申请处理
+    36300   cd  电子账户交易密码验证
+    36301   cd  电子账户交易密码重置
+    36302   cd  电子账户交易密码修改
+    73658   dp  外围流水查询
+    73659   dp  外围自动冲正
+    83002   it  积分账户消费
+    83003   it  积分余额查询
+    83005   it  积分交易历史查询
+    83006   it  积分换算金额查询
+    83007   it  积分换算比例维护
+    83008   dp  客户冻结积分查询
+    83009   dp  积分报表查询

@@ -1,0 +1,196 @@
+一.数据库备份(全量备份)
+	su - cbsdb
+	在/data 下 (新建文件夹 区分原数据与新建后的数据库信息)
+	db2start 启动数据库
+	db2 connect to cbsdb 连接数据库
+	db2 list applications 显示连接应用
+	db2 force applications all 断开连接应用
+	db2 list applications 检查是否断开
+	db2 backup database cbsdb 新建目录备份,在指定的备份目录下执行
+	db2 list history backup all for cbsdb 备份完成 显示备份记录
+
+二.导出表数据(备份时间较长可新开终端窗口,同步进行)
+	db2 connect to cbsdb;db2move CBSDB export -u 用户名 -p 密码
+	备注:若要导出指定数据 按下列方法 (不同导出命令,请不要在同一目录下执行) 
+	db2move CBSDB export -tn 表名,表名
+					     -sn schema名称   	
+
+三.导出表结构(新开终端窗口)
+	db2 connect to cbsdb;db2look -d CBSDB -e -o CBSDB.ddl -l -x -f  
+	
+	修改建表脚本 vi 建表脚本 命令模式下拷贝以下所有替换语句、粘贴 
+	:g/"SMRYIF" VARCHAR(30)/s//"SMRYIF" VARCHAR(200)/g
+	:g/"PMMEAN" VARCHAR(40)/s//"PMMEAN" VARCHAR(60)/g
+	:g/"PRDDES" VARCHAR(60)/s//"PRDDES" VARCHAR(200)/g
+	:g/"PARADS" VARCHAR(60)/s//"PARADS" VARCHAR(200)/g
+	:g/"DESCRP" VARCHAR(128)/s//"DESCRP" VARCHAR(256)/g
+	:g/"PWTPNM" VARCHAR(20)/s//"PWTPNM" VARCHAR(60)/g
+	:g/"SHTNAM" VARCHAR(20)/s//"SHTNAM" VARCHAR(30)/g
+	:g/"BRAHSM" VARCHAR(20)/s//"BRAHSM" VARCHAR(30)/g
+	:g/"ACSBNM" VARCHAR(80)/s//"ACSBNM" VARCHAR(128)/g
+	:g/"DESCIF" VARCHAR(32)/s//"DESCIF" VARCHAR(128)/g
+	:g/"TELLERNAME" VARCHAR(20)/s//"TELLERNAME" VARCHAR(30)/g
+	:g/"MOINF1" VARCHAR(128)/s//"MOINF1" VARCHAR(256)/g
+	:g/"ISCHNL" VARCHAR(2)/s//"ISCHNL" VARCHAR(3)/g
+	:g/"SRCDDC" VARCHAR(80)/s//"SRCDDC" VARCHAR(128)/g
+	:g/"IRCDDS" VARCHAR(80)/s//"IRCDDS" VARCHAR(128)/g
+	:g/"CURNAM" VARCHAR(12)/s//"CURNAM" VARCHAR(18)/g
+	:g/"CKSUB1" VARCHAR(20)/s//"CKSUB1" VARCHAR(60)/g
+	:g/"CKSUB2" VARCHAR(20)/s//"CKSUB2" VARCHAR(60)/g
+	:g/"CKRSDS" VARCHAR(80)/s//"CKRSDS" VARCHAR(128)/g
+	:g/"DTDESC" VARCHAR(80)/s//"DTDESC" VARCHAR(128)/g
+	:g/"CHNDCR" VARCHAR(22)/s//"CHNDCR" VARCHAR(128)/g
+	:g/"FLGDES" VARCHAR(80)/s//"FLGDES" VARCHAR(128)/g
+	:g/"RCDAFS" VARCHAR(4000)/s//"RCDAFS" VARCHAR(6000)/g
+	:g/"RCDPRS" VARCHAR(4000)/s//"RCDPRS" VARCHAR(6000)/g
+	:g/"REGION" VARCHAR(40)/s//"REGION" VARCHAR(60)/g
+	:g/"LEVELL" VARCHAR(8)/s//"LEVELL" VARCHAR(12)/g
+	:g/"STCITY" VARCHAR(20)/s//"STCITY" VARCHAR(30)/g
+	:g/"PROVIC" VARCHAR(10)/s//"PROVIC" VARCHAR(30)/g
+	:g/"AFLNAT" VARCHAR(40)/s//"AFLNAT" VARCHAR(60)/g
+	:g/"TLERNM" VARCHAR(22)/s//"TLERNM" VARCHAR(60)/g
+	:g/"CHNNMY" VARCHAR(40)/s//"CHNNMY" VARCHAR(60)/g
+	:g/"FDCHIN" VARCHAR(40)/s//"FDCHIN" VARCHAR(128)/g
+	:g/"TRANNM" VARCHAR(80)/s//"TRANNM" VARCHAR(200)/g
+	:g/"FDLSIF" VARCHAR(80)/s//"FDLSIF" VARCHAR(128)/g
+	:g/"FDCNDS" VARCHAR(80)/s//"FDCNDS" VARCHAR(128)/g
+	:g/"CUSTNM" VARCHAR(20)/s//"CUSTNM" VARCHAR(200)/g
+	:g/"MENUITEMDESC" VARCHAR(30)/s//"MENUITEMDESC" VARCHAR(256)/g
+	:g/"TRNAME" VARCHAR(80)/s//"TRNAME" VARCHAR(200)/g
+	:g/"SEQUNM" VARCHAR(60)/s//"SEQUNM" VARCHAR(90)/g
+	:g/"OBJNAM" VARCHAR(20)/s//"OBJNAM" VARCHAR(128)/g
+	:g/"FRZRSN" VARCHAR(100)/s//"FRZRSN" VARCHAR(200)/g
+	:g/"PDFDDS" VARCHAR(40)/s//"PDFDDS" VARCHAR(200)/g
+	:g/"DPPMDS" VARCHAR(60)/s//"DPPMDS" VARCHAR(200)/g
+	:g/"QUOTEX" VARCHAR(80)/s//"QUOTEX" VARCHAR(200)/g
+	:g/"DATANM" VARCHAR(40)/s//"DATANM" VARCHAR(60)/g
+	:g/"CARDDE" VARCHAR(40)/s//"CARDDE" VARCHAR(90)/g
+
+	检查修改结果
+	例:grep -E '"SMRYIF" VARCHAR|"PMMEAN" VARCHAR' 建表文件|sort|uniq -c
+
+四.数据库配置写入文件(用于对比新旧数据库)
+	1.db2 get db cfg for cbsdb>db配置名称  				  --cbsdb配置
+	2.db2 get dbm cfg         >数据库配置名称             --数据库整体配置
+
+五.导出数据库表容量(用于对比新旧数据库)
+	db2 connect to cbsdb;db2 set current schema cbsdb;
+
+	db2 "select count(distinct TABNAME) from syscat.TABLES where TABSCHEMA='CBSDB'" --查看schema=CBSDB的表数量
+
+	db2 EXPORT TO "tablelist.txt" OF DEL MODIFIED BY coldel0x08 select distinct TABNAME from syscat.TABLES where TABSCHEMA=current schema --导出数据库所有表名
+
+	wc -l tablelist.txt --校验表数量
+
+ 	for i in `cat tablelist.txt | sed 's/"//g;'`; do echo "$i";db2 "SELECT COUNT(1) NUM FROM CBSDB.$i";done>tbnum.txt --导出所有表数据容量
+
+六.删除并重新建数据库(等上述步骤全部执行完)
+	su - cbsdb
+ 	db2 connect to cbsdb user 用户名 using 密码-- 连接
+	db2 list applications 显示连接应用
+	db2 force applications all 断开连接应用
+	db2 list applications 检查是否断开
+	db2 terminate 终止
+	db2 drop db cbsdb配置 删除数据库
+
+    重新建库
+	db2 update dbm cfg using DFTDBPATH /data/cbsdb --修改数据库保存路径
+	db2 update dbm cfg using SVCENAME 50000 --端口号 默认50000
+	db2set DB2COMM=TCPIP
+	db2set db2codepage=1208
+	db2 terminate
+
+    db2start
+	db2 CREATE DATABASE CBSDB ALIAS CBSDB USING CODESET UTF-8 TERRITORY CN --编码UTF-8
+	db2 CONNECT TO CBSDB;
+	db2 -tvf 建表语句
+
+	修改数据库配置
+	db2 update db cfg for CBSDB using LOCKTIMEOUT 100 LOGFILSIZ 40960 LOGPRIMARY  100 LOGSECOND 50
+
+	db2 update db cfg using SELF_TUNING_MEM on
+	db2 update db cfg using MAXLOCKS AUTOMATIC
+	db2 update db cfg using LOCKLIST AUTOMATIC
+	db2 update db cfg using SORTHEAP AUTOMATIC
+
+
+七.导入表数据
+    去除表外键
+    db2 connect to cbsdb;db2 set current schema cbsdb;
+	db2 "ALTER TABLE BATCH_JOB_EXECUTION DROP CONSTRAINT JOB_INST_EXEC_FK";
+	db2 "ALTER TABLE BATCH_JOB_EXECUTION_CONTEXT DROP CONSTRAINT JOB_EXEC_CTX_FK";
+	db2 "ALTER TABLE BATCH_JOB_EXECUTION_PARAMS DROP CONSTRAINT JOB_EXEC_PARAMS_FK";
+	db2 "ALTER TABLE BATCH_STEP_EXECUTION DROP CONSTRAINT JOB_EXEC_STEP_FK";
+	db2 "ALTER TABLE BATCH_STEP_EXECUTION_CONTEXT DROP CONSTRAINT STEP_EXEC_CTX_FK";
+     
+    数据导入 
+    db2 connect to cbsdb;db2 set current schema cbsdb;db2move CBSDB import
+
+    数据校验 
+
+    查看 用于对比新旧数据库 步骤  进行校验 
+	导出的两份数据对比方式 
+	例：diff a表数据容量 b表数据容量>tbnumdiff.log 
+	more tbnumdiff.log  123c123 为行号
+	vi a表数据容量 
+	添加行号  :set nu   转到行号:123  查看
+
+
+    如果数据没有问题：还原外键
+    db2 connect to cbsdb;db2 set current schema cbsdb;
+	db2 "ALTER TABLE BATCH_JOB_EXECUTION ADD CONSTRAINT JOB_INST_EXEC_FK FOREIGN KEY (JOB_INSTANCE_ID) REFERENCES BATCH_JOB_INSTANCE (JOB_INSTANCE_ID)";
+	db2 "ALTER TABLE BATCH_JOB_EXECUTION_CONTEXT ADD CONSTRAINT JOB_EXEC_CTX_FK FOREIGN KEY (JOB_EXECUTION_ID) REFERENCES BATCH_JOB_EXECUTION (JOB_EXECUTION_ID)";
+	db2 "ALTER TABLE BATCH_JOB_EXECUTION_PARAMS ADD CONSTRAINT JOB_EXEC_PARAMS_FK FOREIGN KEY (JOB_EXECUTION_ID) REFERENCES BATCH_JOB_EXECUTION (JOB_EXECUTION_ID)";
+	db2 "ALTER TABLE BATCH_STEP_EXECUTION ADD CONSTRAINT JOB_EXEC_STEP_FK FOREIGN KEY (JOB_EXECUTION_ID) REFERENCES BATCH_JOB_EXECUTION (JOB_EXECUTION_ID)";
+	db2 "ALTER TABLE BATCH_STEP_EXECUTION_CONTEXT ADD CONSTRAINT STEP_EXEC_CTX_FK FOREIGN KEY (STEP_EXECUTION_ID) REFERENCES BATCH_STEP_EXECUTION (STEP_EXECUTION_ID)";
+
+
+八.问题处理
+导出文件说明:
+EXPORT.out 导出明细 
+IMPORT.out 导入明细
+db2move.lst 执行表清单 
+例: !"CBSDB   "."CCDLLFD"!tab36.ixf!tab36.msg!  
+	CCDLLFD 表数据tab36.ixf    tab36.msg导入导出详情(包含：报错信息,行号)
+
+
+
+部分表数据为导出
+  新建文件夹 
+  导出部分表 db2 connect to cbsdb;db2 set current schema cbsdb;db2move CBSDB export -tn 表名,表名
+  再执行导入 db2move CBSDB import
+
+
+导入部分表数据不全(检查中文字段 扩容)
+  新建文件夹 
+  将db2move.lst 执行表清单 中对应的ixf文件拷贝到新建文件夹中 
+  例:CCDLLFD 导入被阻止 -Rejected:           1 
+    grep CCDLLFD db2move.lst 找到 对应的ixf文件
+    cp ixf  新建的文件夹
+	vi db2move.lst  粘贴!"CBSDB   "."CCDLLFD"!tab36.ixf!tab36.msg! 
+	再执行导入 db2move CBSDB import
+
+容量问题 
+备份数据压缩
+gzip -v 压缩
+gzip -d 解压
+
+
+查询表空间大小
+
+db2 "SELECT SUM(TBSP_TOTAL_SIZE_KB)/1024 AS TOTALMB,
+SUM(TBSP_USED_SIZE_KB)/1024 AS USEDMB,
+SUM(TBSP_FREE_SIZE_KB)/1024 AS FREEMB,
+TBSP_PAGE_SIZE/1024 AS PAGESIZE_K,
+TBSP_NAME AS TSPACE_NAME
+FROM SYSIBMADM.TBSP_UTILIZATION 
+--WHERE TBSP_NAME=
+GROUP BY TBSP_NAME,TBSP_PAGE_SIZE"
+
+
+
+还原数据库(删除新建的数据库)	
+	1.db2 force applications all
+	2.db2 list applications 检查是否断开
+	3.db2 restore database CBSDB taken at 20180817173752 
+	(备份文件名 CBSDB.0.cbsdb.DBPART000.20180817173752.001) 

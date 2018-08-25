@@ -1,0 +1,113 @@
+
+db2 get dbm cfg                         --查看实例的配置
+/opt/IBM/db2/V10.1/bin                  --此目录是查看root用户下的实例，命令./db2ilist
+/opt/IBM/db2/V10.1/instance             --此目录是删除root用户下的实例，命令./db2idrop 实例名
+查看用户到root根目录下cd / 下的passwd文件里面查看
+
+
+1.删除实例: ./db2idrop  cbsdb           --删除cbsdb实例/opt/IBM/db2/V10.1/bin#./db2ilist
+2.删除用户：userdel -r cbsdb          --删除cbsdb用户
+
+3.新建用户：
+useradd -m -g db2iadm -d /home/cbsdb cbsdb  --用root用户执行
+passwd cbsdb                                --设置cbsdb用户的密码
+
+4.新建实例：
+cd /opt/IBM/db2/V10.1/instance && ./db2icrt -u db2fenc1 cbsdb  --进入实例目录新建实例
+
+5.修改配置文件：.bash_profile或者.profile    
+--重新登录，查看有没有生效命令：echo $DBNAME，在:/home/cbs#:ls -all
+
+6.data下新建一个文件夹存放数据库文件mkdir cbsdb    --防止数据文件太大原文件夹放不下
+  df -g 查看文件夹大小
+  修改cbsdb文件夹的用户和组                        --chown 用户名：组 文件夹名
+7.修改数据文件存放目录：db2 update dbm cfg using DFTDBPATH /data/cbsdb 
+
+8.把脚本复制到服务器上，包括bin文件夹，建表语句，表数据，源数据，修改脚本的用户权限         --chmod 777 *  7代表全部权限：4-r,2-w,1-x(执行权限)
+
+ su - cbsdb
+ db2 update dbm cfg using SVCENAME 50001
+
+
+ db2set DB2COMM=TCPIP      --db2set -all 查看
+ db2set db2codepage=1392   --db2set -all 查看
+ db2 terminate 中断
+
+9.新建数据库：
+执行建库脚本db2crtdb.sh CBSDB
+
+10.连接数据库测试db2 connect to CBSDB(数据库名称)
+
+
+11.修改数据库配置：
+db2 get db cfg for CBSDB(数据库名称):
+db2 update db cfg for CBSDB using LOCKTIMEOUT 100 LOGFILSIZ 40960 LOGPRIMARY  100 LOGSECOND 50
+db2 update db cfg for CBSDB using LOCKTIMEOUT 60 LOGFILSIZ 4096 LOGPRIMARY  50 LOGSECOND 20
+LOCKTIMEOUT 60
+LOGFILSIZ 40960
+LOGPRIMARY  100
+LOGSECOND   50
+
+
+12.新建存放数据文件夹tmpdata：
+在另一个数据库导出表结构和Sequences
+db2exportSchema.sh 路径/XXXX.sql                        --导出表结构
+在此文件夹下执行db2unload.sh  -all                      --导出所有表的数据
+
+
+13.在数据库存放导出数据的文件夹下：
+db2run.sh    存放路径/XXXX.sql                          --导入表结构
+执行for ii in `ls *.unl`; do db2load.sh $ii; done       --导入表数据
+
+14.建一个log文件夹
+
+
+传文件：
+scp -r 文件夹 用户名@ip:/路径   ----从一个服务器传文件或者文件夹到另外一个服务器
+
+
+导入导出数据语句：
+db2 "export  to DJXNXYZ.del of del modified by codepage=1392   select  * from  DJXNXYZ"
+db2 import from MEMBER_BASE.del of del insert into CBSDB.MEMBER_BASE
+db2 import from T_CARD_NO.del  of del insert into CBSDB.T_CARD_NO
+db2 import from T_ELE_ACCOUNT_TRANS_DETAIL.del  of del insert into CBSDB.T_ELE_ACCOUNT_TRANS_DETAIL
+db2 import from T_POINT_ACCOUNT.del  of del insert into CBSDB.T_POINT_ACCOUNT
+db2 import from T_POINT_ACCOUNT_FREEZE.del  of del insert into CBSDB.T_POINT_ACCOUNT_FREEZE
+db2 import from T_BIND_CARD_ACCOUNT_INFO.del  of del insert into CBSDB.T_BIND_CARD_ACCOUNT_INFO
+db2 import from T_ELE_ACCOUNT.del  of del insert into CBSDB.T_ELE_ACCOUNT
+db2 import from T_ORG.del  of del insert into CBSDB.T_ORG
+db2 import from T_POINT_ACCOUNT_DETAIL.del  of del insert into CBSDB.T_POINT_ACCOUNT_DETAIL
+
+
+
+-------------------------------
+grep "The utility is beginning to load data from file" CBSDB_import_20180813.log
+grep "Number of rows rejected" CBSDB_import_20180813.log
+
+
+cp -R yztb /home/db2inst1/cbsdbdata;
+
+cd /home/db2inst1/cbsdbdata;chown -R db2inst1:db2iadm yztb
+
+for ii in `ls *.unl`; do db2load.sh $ii; done 
+
+db2 "export to MEMBER_BASE.del of del modified by codepage=1392   select  * from  MEMBER_BASE" user cbsdb using cbsdb123456
+
+
+db2 import from ZCKZHZB.unl of del insert into CBSDB.ZCKZHZB
+
+
+
+
+POLICY
+HMON_ATM_INFO
+HMON_COLLECTION
+
+LCKDHTJ 
+LCKLXJT
+LLXSFDB                                                                        LLXSTJB
+LZHSRYE                                                                        LZZHBLS 
+LYDZZLS
+DCKZXXB_LIMIT_GROUP
+
+db2 EXPORT TO "tablelist.txt" OF DEL MODIFIED BY coldel0x08 select distinct TABNAME from syscat.TABLES where TABSCHEMA=current schema

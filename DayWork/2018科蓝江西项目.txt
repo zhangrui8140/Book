@@ -1,0 +1,100 @@
+VPN 61.155.2.142  ccbs  ccbs2015
+cide插件 http://115.182.90.205:9480/update/  
+http://svn.jxnxs.com/svn/IFS-DEV
+http://svn.jxnxs.com/svn/IFS-DEV/csii-source/trunk
+10.25.171.248 weizl/zoe  生产库   10.0.82.94 cbsdb cbsdb
+
+开发环境   http://svn.jxnxs.com/svn/IFA-DEV
+A环境   http://svn.jxnxs.com/svn/IFA-SIT
+D环境   http://svn.jxnxs.com/svn/IFA-UAT
+生产环境   http://svn.jxnxs.com/svn/IFA-PRD
+
+svn文档
+https://10.25.172.158/svn/JXNXS-ITFIN/docs/03-系统设计/账户体系
+zhangrui zhangrui+12
+
+svn To南京
+https://61.155.2.142:1443/svn/ccbsonline/branches/jxnxcbs
+zhangrui 111111
+
+
+测试服务器
+10.0.117.191_jxnx_jxnx      数据库 10.0.114.182:50000
+10.0.117.60_jxnx_jxnx 跑批  数据库 10.0.114.182:50000
+
+10.0.108.157_cbs_cbs  跑批  数据库 10.0.114.182:50000
+10.0.108.158_cbs_cbs        数据库 10.0.114.186:50001
+
+
+跑批：
+ A2  http://10.0.108.157:18082/bmp/index.html#/login                  admin   admin
+
+ A1  http://10.0.117.191:18082/bmp/index.html#/tradesys#%2Ftradesys   admin   jxnx
+
+先跑交易 再跑会计
+
+所有新开发的交易都必须配置ctranct与ctranpa，其中ctranct表中的ctlfg1字段在属于动账交易时配置成1，非动账时是0，这点一定要记住
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

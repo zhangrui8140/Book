@@ -1,0 +1,6 @@
+#!/bin/bash
+# author zhangrui
+# time 20180716
+echo "表名 字段名";  
+grep -i $1 * |grep -i $2
+

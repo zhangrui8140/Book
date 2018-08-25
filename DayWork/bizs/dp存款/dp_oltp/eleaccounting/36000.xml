@@ -1,0 +1,74 @@
+业务流程：
+
+<?xml version="1.0" encoding="UTF-8"?>
+<oltpConf oltpProject="com.csii.ccbs.dp.oltp" isOltpProject="com.csii.ccbs.lt.oltp" facadeProject="com.csii.ccbs.lt.facade" customGenServiceTypes="true" genServiceTypes="dubbo" version="1.1" module="dp" name="36000" package="com.csii.ccbs.dp" subPackage="eleaccounting" description="电子账户产品开户" serviceProject="com.csii.ccbs.dp.service" inputUseExistClass="false" outputUseExistClass="false" subModule="dp"> 
+  <input> 
+    <field name="custac" type="String" desc="客户账号"/>  
+    <field name="prdcde" type="String" desc="产品代码"/>  
+    <field name="idtype" type="String" desc="证件种类"/>  
+    <field name="idinfo" type="String" desc="证件号码"/>  
+    <field name="custno" type="String" desc="客户号"/>  
+    <field name="acctnm" type="String" desc="账户名称"/>  
+    <field name="acctsq" type="String" desc="子账户序号"/>  
+    <field name="curccd" type="String" desc="货币代号"/>  
+    <field name="carefg" type="String" desc="钞汇标志"/>  
+    <field name="opacam" type="BigDecimal" desc="开户金额"/>  
+    <field name="pamtcd" type="String" desc="支付条件"/>  
+    <field name="tranpw" type="String" desc="交易密码"/>  
+    <field name="pamqut" type="BigDecimal" desc="支付限额"/>  
+    <field name="actcd1" type="String" desc="账户分类码1"/>  
+    <field name="acterm" type="String" desc="账户存款期限"/>  
+    <field name="bidate" type="String" desc="起息日"/>  
+    <field name="yndaa1" type="String" desc="是否允许通兑"/>  
+    <field name="actcd2" type="String" desc="账户分类码2"/>  
+    <field name="ynflag" type="String" desc="是否标志"/>  
+    <field name="daabrg" type="String" desc="通兑范围"/>  
+    <field name="csecfg" type="String" desc="现金通兑标志"/>  
+    <field name="tpwafg" type="String" desc="转账通兑标志"/>  
+    <field name="agetps" type="String" desc="代理人"/>  
+    <field name="agpstp" type="String" desc="代理人证件种类"/>  
+    <field name="agpsid" type="String" desc="代理人证件号码"/>  
+    <field name="intrin" type="BigDecimal" desc="利率"/>  
+    <field name="matudt" type="String" desc="到期日期"/>  
+    <field name="bidtrg" type="String" desc="起息日规则"/>  
+    <field name="acinrt" type="BigDecimal" desc="实际利率"/>  
+    <field name="irdfmd" type="String" desc="利率定义方式"/>  
+    <field name="irfltp" type="String" desc="利率浮动类型"/>  
+    <field name="acinfv" type="BigDecimal" desc="账户利率浮动值"/>  
+    <field name="cdtpno" type="String" desc="卡类型编号"/>  
+    <field name="ckzhfl" type="String" desc="账户分类"/>  
+    <field name="trdpmd" type="String" desc="转存方式"/>  
+    <field name="dwinvl" type="Long" desc="支取间隔"/>  
+    <field name="rnterm" type="String" desc="续存存期"/>  
+    <field name="tiact1" type="String" desc="转入账号"/>  
+    <field name="pdrnam" type="BigDecimal" desc="预定续存金额"/> 
+  </input>  
+  <output> 
+    <field name="custac" type="String" desc="客户账号"/>  
+    <field name="custno" type="String" desc="客户号"/>  
+    <field name="acctsq" type="String" desc="子账户序号"/>  
+    <field name="acctnm" type="String" desc="账户名称"/>  
+    <field name="prdcde" type="String" desc="产品代码"/>  
+    <field name="pdinfo" type="String" desc="产品说明"/>  
+    <field name="sysact" type="String" desc="系统账号"/>  
+    <field name="curccd" type="String" desc="货币代号"/>  
+    <field name="carefg" type="String" desc="钞汇标志"/>  
+    <field name="creblc" type="BigDecimal" desc="当前余额"/>  
+    <field name="daabrg" type="String" desc="通兑范围"/>  
+    <field name="actcd1" type="String" desc="账户分类码1"/>  
+    <field name="acterm" type="String" desc="账户存款期限"/>  
+    <field name="bidate" type="String" desc="起息日"/>  
+    <field name="trdpmd" type="String" desc="转存方式"/>  
+    <field name="dwinvl" type="Long" desc="支取间隔"/>  
+    <field name="epdwam" type="BigDecimal" desc="每期取款金额"/>  
+    <field name="rnterm" type="String" desc="续存存期"/>  
+    <field name="tiact1" type="String" desc="转入账号"/>  
+    <field name="pdrnam" type="BigDecimal" desc="预定续存金额"/>  
+    <field name="exprdt" type="String" desc="账户到期日"/>  
+    <field name="actcd2" type="String" desc="账户分类码2"/>  
+    <field name="trdate" type="String" desc="交易日期"/>  
+    <field name="tlersn" type="String" desc="柜员流水号码"/>  
+    <field name="ckzhfl" type="String" desc="账户分类"/> 
+  </output>  
+  <complexField/> 
+</oltpConf>

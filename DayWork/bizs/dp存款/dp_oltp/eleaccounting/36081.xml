@@ -1,0 +1,55 @@
+MSTKNO=78026c268e314157b658dd5443aa1a47, Trdate=20180720, TLERNM=互联网核心虚拟柜员, PRINFL=, Ymzjzr=24508.79, Ymjfzc=0, Ymbhdk=0, _TranEclapsedTime=7933, GLTRDT=20190720, Ymbhlr=0, TPSEQN=, Bythlr=11832.06, Byxfzc=17292.42, TRCODE=36081, _TranBeginTime=1532054242485, CHANEL=00, WARNIF=, ERRMSG=, Bylrxj=0, TRWHPW=0, Bysjkh=15, ONBCFG=0, ERRCOD=00000000, TRRPCD=00000000, Bhylka=0, CHNDRC=, Byfbzc=22600.00, KYVSNO=0, LGRPCD=9999, ENCRFG=, PINSED=1507744179878, MODULE=, ERRINF=, Bybhlr=1583334.09, MSGMAC=, FRNTDT=20171012, Wuylka=0, Ymthlr=0, BZBRCH=10000, Shijkh=0, Byxzbh=13, Ymlrxj=0, Ymzjlc=0, Byxzwb=0, Byffdk=0, Bybdlc=1463481.91, TRTIME=103722, SOUADD=192.168.14.16, Ymlcxj=0, TLECOD=I00005, Ymghdk=0, TRDATE=20190720, STSBFG=0, Bylcxj=0, Byzjzr=0, Ymbdlc=0, TLERSN=, Byghdk=46151.10, FRNTCD=40014, CHNSRC=, RQASTP=O, Byxzth=2, ACBRCH=10000, AUTHPW=, TRSBCD=, PRINCT=, ACTRDT=20190720, PFTSFG=0, TPDATE=, Thylka=0, FRNTSN=ecc74d54c9a546408687507d395d0d47, Ymzhye=53522237.88, MACBRN=BMP, _TranSeqno=-1, _TranEndTime=1532054250418, TRANMD=1, ERCODE=, DUBBOF=1
+
+
+MSTKNO=78026c268e314157b658dd5443aa1a47, Trdate=20180720, TLERNM=互联网核心虚拟柜员, PRINFL=, Ymzjzr=24508.79, Ymjfzc=0, Ymbhdk=0, _TranEclapsedTime=2059, GLTRDT=20190720, Ymbhlr=0, TPSEQN=, Bythlr=11832.06, Byxfzc=17292.42, TRCODE=36081, _TranBeginTime=1532072443588, CHANEL=00, WARNIF=, ERRMSG=, Bylrxj=0, TRWHPW=0, Bysjkh=15, ONBCFG=0, ERRCOD=00000000, TRRPCD=00000000, Bhylka=0, CHNDRC=, Byfbzc=22600.00, KYVSNO=0, LGRPCD=9999, ENCRFG=, PINSED=1507744179878, MODULE=, ERRINF=, Bybhlr=1583334.09, MSGMAC=, FRNTDT=20171012, Wuylka=0, Ymthlr=0, BZBRCH=10000, Shijkh=0, Byxzbh=13, Ymlrxj=0, Ymzjlc=0, Byxzwb=0, Byffdk=0, Bybdlc=1463481.91, TRTIME=154043, SOUADD=192.168.14.16, Ymlcxj=0, TLECOD=I00005, Ymghdk=0, TRDATE=20190720, STSBFG=0, Bylcxj=0, Byzjzr=0, Ymbdlc=0, TLERSN=, Byghdk=46151.10, FRNTCD=40014, CHNSRC=, RQASTP=O, Byxzth=2, ACBRCH=10000, AUTHPW=, TRSBCD=, PRINCT=, ACTRDT=20190720, PFTSFG=0, TPDATE=, Thylka=0, FRNTSN=a53443676ef846e19db88a155593586d, Ymzhye=53522237.88, MACBRN=BMP, _TranSeqno=-1, _TranEndTime=1532072445647, TRANMD=1, ERCODE=, DUBBOF=1
+
+
+本行卡Y 		Byxzbh 13  
+他行卡N 		Byxzth 2
+本他行卡总数    Bysjkh 15
+本月本行流入    Bybhlr 1583334.09
+本月他行流入    Bythlr 11832.06
+
+Bybdlc 1463481.91 //本月新增从绑定I类户资金流出  本月新增提现金额
+		
+Byxfzc 17292.42 //本月消费缴费支出  03-消费 23-生活缴费 24-账单缴费  资金转出交易  +25-社保缴费
+		
+Ymzhye 53522237.88 //截至本月末的所有账户余额
+
+Ymzjzr 24508.79 //月末非绑定卡的资金转入 
+		
+Byfbzc 22600.00 //本月非绑转出，特指理财归集
+	
+Byghdk 46151.10 //本月归还贷款
+		
+Byffdk 0;//本月发放贷款
+
+Byxzwb 0 ;//“无需绑定I类户”开出的II类户的数量
+
+
+
+MSTKNO=78026c268e314157b658dd5443aa1a47, Trdate=20180630, TLERNM=互联网核心虚拟柜员, PRINFL=, Ymzjzr=0.00, Ymjfzc=0, Ymbhdk=0, _TranEclapsedTime=1692, GLTRDT=20190720, Ymbhlr=0, TPSEQN=, Bythlr=0.00, Byxfzc=0.00, TRCODE=36081, _TranBeginTime=1532056429791, CHANEL=00, WARNIF=, ERRMSG=, Bylrxj=0, TRWHPW=0, Bysjkh=0, ONBCFG=0, ERRCOD=00000000, TRRPCD=00000000, Bhylka=0, CHNDRC=, Byfbzc=0.00, KYVSNO=0, LGRPCD=9999, ENCRFG=, PINSED=1507744179878, MODULE=, ERRINF=, Bybhlr=0.00, MSGMAC=, FRNTDT=20171012, Wuylka=0, Ymthlr=0, BZBRCH=10000, Shijkh=0, Byxzbh=0, Ymlrxj=0, Ymzjlc=0, Byxzwb=0, Byffdk=0, Bybdlc=0.00, TRTIME=111349, SOUADD=192.168.14.16, Ymlcxj=0, TLECOD=I00005, Ymghdk=0, TRDATE=20190720, STSBFG=0, Bylcxj=0, Byzjzr=0, Ymbdlc=0, TLERSN=, Byghdk=0.00, FRNTCD=40014, CHNSRC=, RQASTP=O, Byxzth=0, ACBRCH=10000, AUTHPW=, TRSBCD=, PRINCT=, ACTRDT=20190720, PFTSFG=0, TPDATE=, Thylka=0, FRNTSN=7c92ddf88e5a40f1949a8070991be4e1, Ymzhye=53522237.88, MACBRN=BMP, _TranSeqno=-1, _TranEndTime=1532056431483, TRANMD=1, ERCODE=, DUBBOF=1
+
+
+统计开始时间:20180601-统计结束时间20180630
+本行卡Y 		Byxzbh 0  
+他行卡N 		Byxzth 0
+本他行卡总数    Bysjkh 0
+本月本行流入    Bybhlr 0
+本月他行流入    Bythlr 0
+
+Bybdlc 0 //本月新增从绑定I类户资金流出  本月新增提现金额
+		
+Byxfzc 0 //本月消费缴费支出  03-消费 23-生活缴费 24-账单缴费  资金转出交易  +25-社保缴费
+		
+Ymzhye 53522237.88 //截至本月末的所有账户余额
+
+Ymzjzr 0 //月末非绑定卡的资金转入 
+		
+Byfbzc 0 //本月非绑转出，特指理财归集
+	
+Byghdk 0 //本月归还贷款
+		
+Byffdk 0;//本月发放贷款
+
+Byxzwb 0 ;//“无需绑定I类户”开出的II类户的数量

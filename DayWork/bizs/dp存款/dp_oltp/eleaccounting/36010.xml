@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<oltpConf oltpProject="com.csii.ccbs.dp.oltp" isOltpProject="com.csii.ccbs.lt.oltp" facadeProject="com.csii.ccbs.lt.facade" customGenServiceTypes="true" genServiceTypes="dubbo" version="1.1" module="dp" name="36010" package="com.csii.ccbs.dp" subPackage="eleaccounting" description="提现" serviceProject="com.csii.ccbs.dp.service" inputUseExistClass="false" outputUseExistClass="false" subModule="dp">
+    <input>
+        <field name="sceneb" type="String" desc="场景大类"/>
+        <field name="scenes" type="String" desc="场景小类"/>
+        <field name="ca1nbr" type="String" desc="对账批号"/>
+        <field name="chanel" type="String" desc="渠道"/>
+        <field name="frntdt" type="String" desc="前台日期"/>
+        <field name="frntsn" type="String" desc="前台流水号"/>
+        <field name="custac" type="String" desc="电子账户"/>
+        <field name="acctsq" type="String" desc="子账户序号"/>
+        <field name="tramot" type="BigDecimal" desc="交易金额"/>
+        <field name="smrycd" type="String" desc="摘要代码"/>
+        <field name="descif" type="String" desc="说明信息"/>
+        <field name="atsetp" type="String" desc="自动清算标志"/>
+        <field name="obflag" type="String" desc="本行他行"/>
+        <field name="opsacc" type="String" desc="对方帐号"/>
+        <field name="rcpers" type="String" desc="对方姓名"/>
+        <field name="itbkno" type="String" desc="对方开户行号"/>
+        <field name="osbrnm" type="String" desc="对方开户行名称"/>
+        <field name="authcd" type="String" desc="授权码"/>
+        <field name="moinf0" type="String" desc="备注"/>
+        <field name="pwvfmd" type="String" desc="密码校验方式"/>
+        <field name="tranpw" type="String" desc="交易密码"/>
+        <field name="cycode" type="String" desc="币种"/>
+    </input>
+    <output>
+        <field name="trdate" type="String" desc="交易日期"/>
+        <field name="tlersn" type="String" desc="柜员流水号"/>
+        <field name="sceneb" type="String" desc="场景大类"/>
+        <field name="scenes" type="String" desc="场景小类"/>
+        <field name="custac" type="String" desc="电子账户"/>
+        <field name="opsacc" type="String" desc="对方帐号"/>
+        <field name="tramot" type="BigDecimal" desc="交易金额"/>
+        <field name="moinf0" type="String" desc="备注"/>
+    </output>
+    <complexField/>
+</oltpConf>
+
+
+/**
+ * Date:2018年8月22日
+ * Project:com.csii.ccbs.dp.service
+ * File:DpT36010NewServiceImpl.java
+ * Author:ZR
+ * Description:
+ */
+package com.csii.ccbs.dp.service.impl.oltp.eleaccounting2;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import com.csii.ccbs.aplt.BaseService;
+import com.csii.ccbs.aplt.TranContext;
+import com.csii.ccbs.aplt.base.tools.BeanUtil;
+import com.csii.ccbs.aplt.base.tools.CommUtil;
+import com.csii.ccbs.aplt.base.tools.DateUtil;
+import com.csii.ccbs.cd.comp.daoio.ZkpzxxbDAOIO;
+import com.csii.ccbs.cd.dao.table.model.TblCdZkpzxxb;
+import com.csii.ccbs.dp.comp.accounting.DpExtDeposit;
+import com.csii.ccbs.dp.comp.accounting.DpExtDrawing;
+import com.csii.ccbs.dp.comp.daoio.DckkhzhDAOIO;
+import com.csii.ccbs.dp.comp.qury.DpChkATACSA;
+import com.csii.ccbs.dp.comp.qury.MiQryInfoFromAcct;
+import com.csii.ccbs.dp.constant.DpBizConstant;
+import com.csii.ccbs.dp.constant.DpEnumConstant;
+import com.csii.ccbs.dp.dao.table.TblLtDbdpglbDAO;
+import com.csii.ccbs.dp.dao.table.TblLtDcjwlysDAO;
+import com.csii.ccbs.dp.dao.table.TblLtMdzsjxxDAO;
+import com.csii.ccbs.dp.dao.table.model.TblLtDbdpglb;
+import com.csii.ccbs.dp.dao.table.model.TblLtDcjwlys;
+import com.csii.ccbs.dp.dao.table.model.TblLtDckkhzh;
+import com.csii.ccbs.dp.dao.table.model.TblLtMdzsjxx;
+import com.csii.ccbs.dp.dto.service.DpT36010Input;
+import com.csii.ccbs.dp.dto.service.DpT36010Output;
+import com.csii.ccbs.dp.exception.DpBizException;
+import com.csii.ccbs.dp.service.DpT36010Service;
+import com.csii.ccbs.dp.service.impl.oltp.eleaccounting.DpT36010ServiceImpl;
+import com.csii.ccbs.dp.util.JsonHelper;
+import com.csii.ccbs.lt.dto.comp.DpExtDepositInput;
+import com.csii.ccbs.lt.dto.comp.DpExtDrawingInput;
+import com.csii.ccbs.lt.dto.comp.DpExtDrawingOutput;
+import com.csii.ccbs.lt.dto.comp.MiGetAcIfInput;
+import com.csii.ccbs.lt.dto.comp.MiGetAcIfOutput;
+import com.csii.ccbs.pb.comp.cm.CmGetBrhParaInfo;
+import com.csii.ccbs.pb.comp.tl.TlGenSequenceNo;
+import com.csii.ccbs.pb.comp.voucher.CeChkPwdOnline;
+import com.csii.ccbs.pb.dto.comp.check.CeVoucChekInput;
+import com.csii.ccbs.pb.dto.comp.check.CeVoucChekOutput;
+import com.csii.ccbs.pb.dto.header.CmBrhInfo;
+import com.csii.ccbs.tm.dto.comp.header.sa.SaTransferInfo;
+import com.csii.ccbs.tm.external.service.ExtSaAccountingService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+
+/**
+ * @time: 2018年8月22日
+ * @function:电子账户提现
+ * @author: ZR
+ * 功能流程说明:
+ * 1.
+ * 2.
+ * 
+ */
+public class DpT36010NewServiceImpl extends BaseService implements DpT36010Service {
+
+    protected static final Log logger = LogFactory.getLog(DpT36010NewServiceImpl.class);
+    
+    @Override
+    public DpT36010Output call(DpT36010Input dpT36010Input){
+        logger.info("DpT36010Begin");
+        /**
+         * 初始化
+         */
+        DpT36010Input inputParam = dpT36010Input;
+        DpT36010Output dpT36010Output = BeanUtil.newInstance(DpT36010Output.class);
+        TlGenSequenceNo.genSequenceNo();
+        
+        /**
+         * 请求参数
+         */
+        logger.info("DpT36010Input:"+JsonHelper.JsonSerialize(dpT36010Input));
+        InitInputParam(inputParam);
+        CheckInputParam(inputParam);
+        
+        /**
+         * 环境变量
+         */
+        String tlersn = TranContext.getStringComfld("TLERSN");//柜员流水号
+        String trdate = TranContext.getStringComfld("TRDATE");//交易日期
+        String bzbrch = TranContext.getStringComfld("BZBRCH");//机构号
+        TranContext.putUsrData(DpBizConstant.DZZHSCENEB, dpT36010Input.getSceneb());// 场景大类
+        TranContext.putUsrData(DpBizConstant.DZZHSCENES, dpT36010Input.getScenes());// 场景小类
+        
+        /**
+         * 检查电子账户信息
+         */
+        TblCdZkpzxxb zkpzxxb=ZkpzxxbDAOIO.selectOne1(inputParam.getCustac(), false);
+        if(CommUtil.isEmpty(zkpzxxb)) {
+            throw DpBizException.BLN9999("电子账号信息不存在");
+        }
+        //电子账户所属机构
+        if(CommUtil.equals("10000", zkpzxxb.getBzbrch())) {
+            throw DpBizException.BLN9999(inputParam.getCustac()+"该账号尚未确定机构号"+zkpzxxb.getBzbrch()+",请先确认机构.");
+        }
+        if(CommUtil.notEquals(bzbrch, zkpzxxb.getBzbrch())){
+            throw DpBizException.BLN9999("输入机构"+bzbrch+"与电子账户所属机构"+zkpzxxb.getBzbrch()+"不匹配");
+        }
+        //电子账户激活状态
+        if (CommUtil.notEquals("0",zkpzxxb.getSgvcst())) {
+            throw DpBizException.BLN9999(inputParam.getCustac()+"该账户未激活，请先做绑卡交易！");
+        }
+        
+        /**
+         * 检查绑定卡信息
+         */
+        List<TblLtDbdpglb> dbdpglbList = getDao(TblLtDbdpglbDAO.class).selectAll1R(dpT36010Input.getCustac());
+        TblLtDbdpglb dbdpglbItem=null;
+        for(TblLtDbdpglb item : dbdpglbList)
+        {
+            if(CommUtil.equals(item.getCardno(), dpT36010Input.getOpsacc())){
+                dbdpglbItem=item;
+                break;
+            }
+        }       
+        if(CommUtil.isNotEmpty(dbdpglbItem)){
+            throw DpBizException.BLN9999(String.format("输入的绑定卡卡号[%s]与电子帐号[%s]关联绑定卡不一致",
+                    dpT36010Input.getOpsacc(),dpT36010Input.getCustac()));
+        }
+        
+        
+        /**
+         * 检查卡密码
+         */
+        CheckPasswd(inputParam.getCustac(),inputParam.getPwvfmd(),inputParam.getTranpw());
+        
+        /**
+         * 校验交易场景
+         */
+        //获取交易场景信息 ？ 如果opsacc未传 无法使用 内部户  else部分根本不会走
+        TblLtDcjwlys tblLtDcjwlys = getDao(TblLtDcjwlysDAO.class)
+                .selectOne1(inputParam.getSceneb(), inputParam.getScenes(),false);
+        if (CommUtil.isNotEmpty(tblLtDcjwlys)) {
+            //存在中间过度户账号
+            if (CommUtil.isNotEmpty(tblLtDcjwlys.getCuacno())) {
+                //内部户账号组成规则:电子账户所属机构号+场景映射内部户类型号
+                inputParam.setOpsacc(zkpzxxb.getBzbrch()+tblLtDcjwlys.getCuacno());
+                inputParam.setRcpers(tblLtDcjwlys.getChnnme());
+                TranContext.putUsrData(DpBizConstant.DZZHACOUNT, inputParam.getOpsacc());// 中间过渡户
+                TranContext.putUsrData(DpBizConstant.DZZHCHNNME, tblLtDcjwlys.getChnnme());// 中间过渡户名称
+            } 
+        } 
+        
+        /**
+         * 记客户账/资金账
+         */
+        //查询客户信息
+        TblLtDckkhzh tblLtDckkhzh = DckkhzhDAOIO.selectOne1(inputParam.getCustac(), true);
+        //查询机构信息
+        CmBrhInfo cmBrhInfo = CmGetBrhParaInfo.getBrhParaInfo(TranContext.getStringComfld("BZBRCH"));
+        //查询账户信息
+        MiGetAcIfInput miQryInfoFromAcctIn = BeanUtil.newInstance(MiGetAcIfInput.class); // 查询账户信息输入结构体
+        MiGetAcIfOutput miQryInfoFromAcctOut = BeanUtil.newInstance(MiGetAcIfOutput.class); // 查询账户信息输出结构体
+        miQryInfoFromAcctIn.setCuacno(inputParam.getCustac());//电子账户
+        miQryInfoFromAcctIn.setAcctsq(inputParam.getAcctsq());//子账户序号
+        miQryInfoFromAcctOut = MiQryInfoFromAcct.qryInfoFromAcct(miQryInfoFromAcctIn);
+        //调用支取、存入组件
+        if (CommUtil.equals(miQryInfoFromAcctOut.getModule(), "DP")) {
+            DoDpExtDrawing(inputParam);
+            DoDpExtDeposit(inputParam,tblLtDckkhzh.getCuacnm(),cmBrhInfo.getBrchnm());
+        }
+        //转入中间过渡户
+        else if (CommUtil.equals(miQryInfoFromAcctOut.getModule(), "TM")) {
+            DoExtSaAccounting(inputParam);
+        }
+        else {
+            logger.info(String.format("账号[%s],模块[%s]", inputParam.getCustac(), miQryInfoFromAcctOut.getModule()));
+            throw DpBizException.BLN9999("记账失败");
+        }
+    
+        /**
+         * 登记对账数据表
+         */
+        TblLtMdzsjxx tblLtMdzsjxx = BeanUtil.newInstance(TblLtMdzsjxx.class);
+        tblLtMdzsjxx.setLgrpcd(TranContext.getLgrpcd(TblLtMdzsjxx.class)); // 法人代码
+        tblLtMdzsjxx.setTrcode(TranContext.getStringComfld("TRCODE")); // 交易码
+        tblLtMdzsjxx.setTrdate(TranContext.getStringComfld("TRDATE")); // 后台日期
+        tblLtMdzsjxx.setTlersn(TranContext.getStringComfld("TLERSN")); // 后台流水号
+    
+        String frntdt=TranContext.getStringComfld("FRNTDT");// 前台日期     
+        String frntsn=TranContext.getStringComfld("FRNTSN");// 前台流水号    
+        //前台日期前台流水号 要么同时有值 要么都为空 都为空 则 取TranContext.getStringComfld
+        if (CommUtil.isNotEmpty(inputParam.getFRNTDT())||CommUtil.isNotEmpty(inputParam.getFRNTSN())) {
+            if(CommUtil.isEmpty(inputParam.getFRNTDT())) throw DpBizException.BLN9999("公共前台日期不可为空");
+            if(CommUtil.isEmpty(inputParam.getFRNTSN())) throw DpBizException.BLN9999("公共前台流水号不可为空");
+        }
+        else {
+            frntdt=inputParam.getFRNTDT();
+            frntsn=inputParam.getFRNTSN();
+        }
+        
+        if (CommUtil.isNotEmpty(inputParam.getFrntdt())||CommUtil.isNotEmpty(inputParam.getFrntsn())) {
+            if(CommUtil.isEmpty(inputParam.getFRNTDT())) throw DpBizException.BLN9999("前台日期不可为空");
+            if(CommUtil.isEmpty(inputParam.getFRNTSN())) throw DpBizException.BLN9999("前台流水号不可为空");
+        }
+        else {
+            frntdt=inputParam.getFrntdt();
+            frntsn=inputParam.getFrntsn();
+        }
+            
+        tblLtMdzsjxx.setFrntdt(frntdt); 
+        tblLtMdzsjxx.setFrntsn(frntsn); 
+        tblLtMdzsjxx.setSequen(0L); // 序号
+        tblLtMdzsjxx.setCa1nbr(inputParam.getCa1nbr()); // 对账批号
+        tblLtMdzsjxx.setChanel(TranContext.getStringComfld("CHANEL")); // 渠道
+        tblLtMdzsjxx.setBzbrch(TranContext.getStringComfld("BZBRCH")); // 营业机构号
+        tblLtMdzsjxx.setAcbrch(TranContext.getStringComfld("ACBRCH")); // 帐务机构号
+        tblLtMdzsjxx.setTra1tl(TranContext.getStringComfld("TLECOD")); // 交易柜员
+        tblLtMdzsjxx.setAuthtl(TranContext.getStringComfld("AUTHTL")); // 授权柜员
+        tblLtMdzsjxx.setMaifdt(DateUtil.getHostDate()); // 主机日期
+        tblLtMdzsjxx.setTrtime(TranContext.getLongComfld("TRTIME")); // 交易时间
+        tblLtMdzsjxx.setCycode(inputParam.getCycode()); // 货币代号
+        tblLtMdzsjxx.setCarefg(DpBizConstant.ACTCEC_CASH); // 钞汇标志
+        
+        tblLtMdzsjxx.setCustac(inputParam.getCustac()); // 客户账号
+        tblLtMdzsjxx.setOsdpac(inputParam.getOpsacc()); // 对方账号
+        tblLtMdzsjxx.setTramot(inputParam.getTramot()); // 交易金额
+        tblLtMdzsjxx.setCmcgam(BigDecimal.ZERO); // 手续费金额
+        tblLtMdzsjxx.setIbprfe(BigDecimal.ZERO); // 跨行手续费
+        tblLtMdzsjxx.setDiffee(BigDecimal.ZERO); // 异地手续费
+        tblLtMdzsjxx.setTbkdam(BigDecimal.ZERO); // 交易行分成金额
+        tblLtMdzsjxx.setTobamt(BigDecimal.ZERO); // 转出行/发卡行分成金额
+        tblLtMdzsjxx.setIbrdia(BigDecimal.ZERO); // 转入行/清算行/第三方分成金额
+        
+        tblLtMdzsjxx.setSceneb(TranContext.getUsrData(DpBizConstant.DZZHSCENEB).toString()); // 场景大类
+        tblLtMdzsjxx.setScenes(TranContext.getUsrData(DpBizConstant.DZZHSCENES).toString()); // 场景小类
+        tblLtMdzsjxx.setAcount(TranContext.getUsrData(DpBizConstant.DZZHACOUNT).toString()); // 中间过渡户账号
+        tblLtMdzsjxx.setChnnme(TranContext.getUsrData(DpBizConstant.DZZHCHNNME).toString()); // 中间过渡户名称
+        tblLtMdzsjxx.setMtbrah(TranContext.getStringComfld("BZBRCH")); // 维护机构
+        tblLtMdzsjxx.setMttime(TranContext.getLongComfld("TRTIME")); // 维护时间
+        tblLtMdzsjxx.setTmstam(1L); // 时间戳
+        tblLtMdzsjxx.setOwnflg(dbdpglbItem.getTypefg());//本他标志  根据对手账号是本行卡还是他行卡决定  Y本行，N他行  add by suwei 20180609
+        tblLtMdzsjxx.setSmrycd(dpT36010Input.getSmrycd());  
+        tblLtMdzsjxx.setRecdst("0"); // 记录状态
+        getDao(TblLtMdzsjxxDAO.class).insert(tblLtMdzsjxx);
+        
+        /**
+         * 返回参数
+         */
+        dpT36010Output.setCustac(dpT36010Input.getCustac());
+        dpT36010Output.setMoinf0(dpT36010Input.getMoinf0());
+        dpT36010Output.setOpsacc(inputParam.getOpsacc());
+        dpT36010Output.setSceneb(dpT36010Input.getSceneb());
+        dpT36010Output.setScenes(dpT36010Input.getScenes());
+        dpT36010Output.setTlersn(TranContext.getStringComfld("TLERSN"));
+        dpT36010Output.setTramot(dpT36010Input.getTramot());
+        dpT36010Output.setTrdate(TranContext.getStringComfld("TRDATE"));
+        
+        logger.info("DpT36010End");
+        return dpT36010Output;
+    }
+    
+    
+    /**
+     * @time: 2018年8月23日
+     * @method: 转入中间过渡户
+     * @author: ZR
+     * @param inputParam
+     */
+    private void DoExtSaAccounting(DpT36010Input inputParam) {
+        SaTransferInfo saTransferInfo = BeanUtil.newInstance(SaTransferInfo.class);
+        saTransferInfo.setAcount(inputParam.getOpsacc());
+        saTransferInfo.setCycode(inputParam.getCycode());
+        saTransferInfo.setTranam(inputParam.getTramot());   
+        saTransferInfo.setDrcrfg(DpEnumConstant.DRCRFG_1); /* 借贷标志 */
+        saTransferInfo.setCatsfg(DpEnumConstant.CATSFG_1); /* 现转标志 */
+        
+        if (CommUtil.isNotEmpty(inputParam.getMoinf0())) {
+            if (CommUtil.compare(inputParam.getMoinf0().length(), 30) >= 0) {
+                saTransferInfo.setSmryif(inputParam.getMoinf0().substring(0, 30)); /* 摘要描述 */
+            } else {
+                saTransferInfo.setSmryif(inputParam.getMoinf0()); /* 摘要描述 */
+            }
+        }
+        saTransferInfo.setOpsacc(inputParam.getCustac()); /* 对方账号 */
+
+        if (CommUtil.equals(DpChkATACSA.chkATACSA("SFDYSA"), "1")) {
+            getService(ExtSaAccountingService.class).accounting(saTransferInfo);
+        }
+    }
+    
+    
+    
+    /**
+     * @time: 2018年8月23日
+     * @method: 账户存入处理
+     * @author: ZR
+     * @param inputParam 请求参数
+     * @param cuacnm 交易账户姓名
+     * @param brchnm 交易账户机构名称
+     */
+    private void DoDpExtDeposit(DpT36010Input inputParam,String cuacnm,String brchnm) {
+        DpExtDepositInput dpDestIn = BeanUtil.newInstance(DpExtDepositInput.class);
+
+        dpDestIn.setCuacno(inputParam.getOpsacc());
+        dpDestIn.setAcccur(inputParam.getCycode());
+        dpDestIn.setActcec(DpBizConstant.ACTCEC_CASH);
+        dpDestIn.setAcctsq(DpBizConstant.ACCTSQ_SPECIALACCOUNT_START);
+        dpDestIn.setAutotranflg(1);
+        dpDestIn.setTsamot(inputParam.getTramot());
+        dpDestIn.setXzjddm(DpEnumConstant.CATSFG_1);
+        dpDestIn.setSmrycd(inputParam.getSmrycd());
+        dpDestIn.setMoinf1(inputParam.getMoinf0());
+        dpDestIn.setOcacfg("0"); 
+        dpDestIn.setCnt(0);
+        dpDestIn.setCtnoac(inputParam.getCustac());
+        dpDestIn.setOpsnam(cuacnm);
+        dpDestIn.setOsbrtp(DpBizConstant.OSBRTP_PAYSYS.substring(2)); /* 对方金融机构类型 */
+        dpDestIn.setOsbrcd(TranContext.getStringComfld("BZBRCH"));      
+        dpDestIn.setOpsbnm(brchnm);
+        DpExtDeposit.extDeposit(dpDestIn);  
+    }
+    
+    
+    /**
+     * @time: 2018年8月22日
+     * @method: 账户支取处理
+     * @author: ZR
+     * @param inputParam
+     */
+    private void DoDpExtDrawing(DpT36010Input inputParam) {
+        
+        DpExtDrawingInput dpDrawIn = BeanUtil.newInstance(DpExtDrawingInput.class);
+        DpExtDrawingOutput dpDrawOut = BeanUtil.newInstance(DpExtDrawingOutput.class);
+
+        dpDrawIn.setCuacno(inputParam.getCustac()); 
+        dpDrawIn.setAcccur(inputParam.getCycode());
+        dpDrawIn.setActcec(DpBizConstant.ACTCEC_CASH);          
+        dpDrawIn.setAcctsq(inputParam.getAcctsq());
+        dpDrawIn.setAutoproflg(DpBizConstant.AUTOPROFLG_YES);
+        dpDrawIn.setTsamot(inputParam.getTramot());
+        dpDrawIn.setXzjddm(DpEnumConstant.CATSFG_1);                
+        if (CommUtil.isEmpty(inputParam.getSmrycd())) {
+            dpDrawIn.setSmrycd("16");//16   提现
+        } else {
+            dpDrawIn.setSmrycd(inputParam.getSmrycd());
+        }
+        dpDrawIn.setMoinf1(inputParam.getMoinf0());
+
+        if (CommUtil.isNotEmpty(inputParam.getOpsacc())) {
+            dpDrawIn.setCtnoac(inputParam.getOpsacc()); 
+            dpDrawIn.setOpsnam(inputParam.getRcpers());
+            dpDrawIn.setOsbrtp(DpBizConstant.OSBRTP_PAYSYS.substring(0, 2));
+            dpDrawIn.setOsbrcd(inputParam.getItbkno()); /* 对方金融机构代码 */
+            dpDrawIn.setOpsbnm(inputParam.getOsbrnm()); /* 对方金融机构名称 */
+        }
+        dpDrawIn.setFinepayflg(1);
+        dpDrawIn.setIntpayflg(1);
+        
+        dpDrawOut = DpExtDrawing.extDrawing(dpDrawIn);
+
+        if (CommUtil.compareRate(dpDrawOut.getDrawamt().subtract(inputParam.getTramot()).abs(),
+                BigDecimal.valueOf(0.0000001)) >= 0) {
+            throw DpBizException.BLN9999("交易金额错误,客户账记账失败");
+        }
+    }
+    
+    
+    
+    /**
+     * @time: 2018年8月22日
+     * @method: 校验卡密码  组件CeChkPwdOnline
+     * @author: ZR
+     * @param custac 电子账户号
+     * @param pwvfmd 校验方式
+     * @param tranpw 密码
+     */
+    private void CheckPasswd(String custac,String pwvfmd,String tranpw) {
+        //无需校验
+        if(CommUtil.equals(pwvfmd,DpEnumConstant.PWVFMD_0)) return;
+        
+        //调用CeChkPwdOnline组件
+        CeVoucChekInput ceVoucChekInput = BeanUtil.newInstance(CeVoucChekInput.class);
+        CeVoucChekOutput ceVoucChekOutput = BeanUtil.newInstance(CeVoucChekOutput.class);
+        ceVoucChekInput.setCustac(custac);  
+        ceVoucChekInput.setTranpw(tranpw);
+        ceVoucChekInput.setPswdt2(DpEnumConstant.PSWDT2_TRANPW);
+        
+        ceVoucChekOutput.setCustac(custac);
+        ceVoucChekOutput.setPwmdtp(DpEnumConstant.PWMDTP_KA);// 密码载体类型
+        ceVoucChekOutput.setPswdt2(DpEnumConstant.PSWDT2_TRANPW);
+        String resultflag = CeChkPwdOnline.checkTrandPwd(ceVoucChekInput, ceVoucChekOutput);
+        if (CommUtil.notEquals(resultflag, "0")) {
+            throw DpBizException.BLN9999("交易密码错误");
+        }
+    }
+    
+    
+    
+    
+    
+    /**
+     * @time: 2018年8月22日
+     * @method: 校验请求参数
+     * @author: ZR
+     * @param inputParam
+     */
+    private void CheckInputParam(DpT36010Input inputParam) {
+        if (CommUtil.isEmpty(inputParam.getSceneb()) || CommUtil.isEmpty(inputParam.getScenes())) {
+            throw DpBizException.BLN9999("场景大类、场景小类必输！");
+        }
+        if (CommUtil.isEmpty(inputParam.getOpsacc())) {
+            throw DpBizException.BLN9999("绑定卡账号不能为空");
+        }
+        if (CommUtil.isEmpty(inputParam.getRcpers())) {
+            throw DpBizException.BLN9999("绑定卡名称不能为空");
+        }
+        if (CommUtil.compareRate(inputParam.getTramot().subtract(BigDecimal.ZERO), BigDecimal.valueOf(0.0000001)) < 0) {
+            throw DpBizException.BLN9999("[交易金额]错误");
+        }
+        
+    }
+    
+    /**
+     * @time: 2018年8月22日
+     * @method: 校验请求参数
+     * @author: ZR
+     * @param inputParam
+     * @return 错误信息
+     */
+    private void InitInputParam(DpT36010Input inputParam) {
+        //币种
+        if (CommUtil.isEmpty(inputParam.getCycode())) inputParam.setCycode(DpBizConstant.ACCCUR_RMB);
+        //子账户序号
+        if (CommUtil.isEmpty(inputParam.getAcctsq())) inputParam.setAcctsq(DpBizConstant.ACCTSQ_SPECIALACCOUNT_START);
+        
+    }
+    
+}
+

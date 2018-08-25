@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<oltpConf oltpProject="com.csii.ccbs.dp.oltp" isOltpProject="com.csii.ccbs.lt.oltp" customGenServiceTypes="false" version="1.1" module="dp" name="36006" package="com.csii.ccbs.dp" subPackage="eleaccounting" description="电子账户转账" serviceProject="com.csii.ccbs.dp.service" inputUseExistClass="false" outputUseExistClass="false" subModule="dp">
+    <input>
+        <field name="sceneb" type="String" desc="场景大类"/>
+        <field name="scenes" type="String" desc="场景小类"/>
+        <field name="custac" type="String" desc="转出电子账户"/>
+        <field name="sequec" type="String" desc="转出子账户序号"/>
+        <field name="dpacct" type="String" desc="转出存款账号"/>
+        <field name="cycode" type="String" desc="转出货币代号"/>
+        <field name="carefg" type="String" desc="转出钞汇标志"/>
+        <field name="pamtcd" type="String" desc="转出支付条件"/>
+        <field name="tranpw" type="String" desc="转出交易密码"/>
+        <field name="idtype" type="String" desc="转出证件种类"/>
+        <field name="idinfo" type="String" desc="转出证件号码"/>
+        <field name="cutchn" type="String" desc="转出客户中文名称"/>
+        <field name="tramot" type="BigDecimal" desc="交易金额"/>
+        <field name="cuacno" type="String" desc="转入电子账号"/>
+        <field name="cuacnm" type="String" desc="转入客户账户名称"/>
+        <field name="acctsq" type="String" desc="转入子账户序号"/>
+        <field name="acount" type="String" desc="转入存款账号"/>
+        <field name="curccd" type="String" desc="转入货币代号"/>
+        <field name="actcec" type="String" desc="转入钞汇标志"/>
+        <field name="smrycd" type="String" desc="摘要代码"/>
+        <field name="moinf1" type="String" desc="备注信息"/>
+    </input>
+    <output>
+        <field name="custno" type="String" desc="客户号"/>
+        <field name="acnotp" type="String" desc="账号类型"/>
+        <field name="custac" type="String" desc="客户账号"/>
+        <field name="cutchn" type="String" desc="客户中文名称"/>
+        <field name="prdcde" type="String" desc="产品代码"/>
+        <field name="tramot" type="BigDecimal" desc="交易金额"/>
+        <field name="acblc1" type="BigDecimal" desc="账户余额"/>
+        <field name="accaci" type="BigDecimal" desc="计提利息"/>
+        <field name="pabtax" type="BigDecimal" desc="应缴税金"/>
+        <field name="cuacno" type="String" desc="客户账号"/>
+        <field name="cuacnm" type="String" desc="客户账户名称"/>
+        <field name="cycode" type="String" desc="货币代号"/>
+        <field name="curccd" type="String" desc="货币代号"/>
+        <field name="tranam" type="BigDecimal" desc="交易金额"/>
+        <field name="moinf1" type="String" desc="备注信息"/>
+        <field name="flgdft" type="String" desc="标志缺省值"/>
+        <field name="acblnc" type="BigDecimal" desc="账户余额"/>
+        <field name="carefg" type="String" desc="钞汇标志"/>
+        <field name="acctsq" type="String" desc="子账户序号"/>
+        <field name="dtbltp" type="String" desc="宕账类型"/>
+        <field name="actcec" type="String" desc="账户钞汇标志"/>
+        <field name="tlersn" type="String" desc="柜员流水号码"/>
+        <field name="trdate" type="String" desc="交易日期"/>
+    </output>
+    <complexField/>
+</oltpConf>
+
+
+电子账户转账

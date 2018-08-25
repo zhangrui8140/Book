@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<oltpConf oltpProject="com.csii.ccbs.dp.oltp" isOltpProject="com.csii.ccbs.lt.oltp" facadeProject="com.csii.ccbs.lt.facade" customGenServiceTypes="true" genServiceTypes="dubbo" version="1.1" module="dp" name="36060" package="com.csii.ccbs.dp" subPackage="eleaccounting" description="电子账户充值并冻结" serviceProject="com.csii.ccbs.dp.service" inputUseExistClass="false" outputUseExistClass="false" subModule="dp">
+    <input>
+        <field name="sceneb" type="String" desc="场景大类"/>
+        <field name="scenes" type="String" desc="场景小类"/>
+        <field name="ca1nbr" type="String" desc="对账批号"/>
+        <field name="chanel" type="String" desc="渠道"/>
+        <field name="frntdt" type="String" desc="前台日期"/>
+        <field name="frntsn" type="String" desc="前台流水号"/>
+        <field name="custac" type="String" desc="客户账号"/>
+        <field name="acctsq" type="String" desc="子账户序号"/>
+        <field name="tramot" type="BigDecimal" desc="交易金额"/>
+        <field name="smrycd" type="String" desc="摘要代码"/>
+        <field name="descif" type="String" desc="说明信息"/>
+        <field name="atsetp" type="String" desc="自动清算标志"/>
+        <field name="obflag" type="String" desc="本行它行"/>
+        <field name="opsacc" type="String" desc="对方账号"/>
+        <field name="rcpers" type="String" desc="收款人"/>
+        <field name="itbkno" type="String" desc="联行行号"/>
+        <field name="osbrnm" type="String" desc="对方机构名称"/>
+        <field name="authcd" type="String" desc="授权码"/>
+        <field name="moinf0" type="String" desc="备注"/>
+        <field name="pwvfmd" type="String" desc="密码校验方式"/>
+        <field name="tranpw" type="String" desc="交易密码"/>
+        <field name="cycode" type="String" desc="货币代号"/>
+        <field name="fzopfg" type="Long" desc="冻结操作标志"/>
+        <field name="frzknd" type="Long" desc="冻结种类"/>
+        <field name="frzrsn" type="String" desc="冻结原因"/>
+        <field name="acctnm" type="String" desc="账户名称"/>
+    </input>
+    <output>
+        <field name="trdate" type="String" desc="交易日期"/>
+        <field name="tlersn" type="String" desc="柜员流水号码"/>
+        <field name="custac" type="String" desc="客户账号"/>
+        <field name="acctnm" type="String" desc="账户名称"/>
+        <field name="opsacc" type="String" desc="对方账号"/>
+        <field name="rcpers" type="String" desc="收款人"/>
+        <field name="sceneb" type="String" desc="场景大类"/>
+        <field name="scenes" type="String" desc="场景小类"/>
+        <field name="tramot" type="BigDecimal" desc="交易金额"/>
+        <field name="moinf0" type="String" desc="备注"/>
+        <field name="fzopfg" type="Long" desc="冻结操作标志"/>
+        <field name="frozno" type="String" desc="冻结编号"/>
+        <field name="aciofg" type="String" desc="账户进出状态"/>
+    </output>
+    <complexField/>
+</oltpConf>
+
+name="sceneb"     desc="场景大类"    
+name="scenes"     desc="场景小类"    
+name="ca1nbr"     desc="对账批号"    
+name="chanel"     desc="渠道"    
+name="frntdt"     desc="前台日期"    
+name="frntsn"     desc="前台流水号"    
+name="custac"     desc="客户账号"    
+name="acctsq"     desc="子账户序号"    
+name="tramot"     desc="交易金额"    
+name="smrycd"     desc="摘要代码"   --理财 07 
+name="descif"     desc="说明信息"    
+name="atsetp"     desc="自动清算标志"   
+name="obflag"     desc="本行它行"    
+name="opsacc"     desc="对方账号"    
+name="rcpers"     desc="收款人"    
+name="itbkno"     desc="联行行号"    
+name="osbrnm"     desc="对方机构名称" 
+name="authcd"     desc="授权码"    
+name="moinf0"     desc="备注"    
+name="pwvfmd"     desc="密码校验方式"   
+name="tranpw"     desc="交易密码"    
+name="cycode"     desc="货币代号"    
+name="fzopfg"     desc="冻结操作标志"   
+name="frzknd"     desc="冻结种类"    
+name="frzrsn"     desc="冻结原因"    
+name="acctnm"     desc="账户名称"    
+
