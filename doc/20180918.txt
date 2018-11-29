@@ -1,0 +1,99 @@
+配置JNDI
+
+修改点 webdefault.xml或者 web.xml
+<resource-ref>
+     <description>My DataSource Reference</description>
+     <res-ref-name>jdbc/DSTest</res-ref-name>
+     <res-type>javax.sql.DataSource</res-type>
+     <res-auth>Container</res-auth>
+</resource-ref>
+
+jar包
+webbase\lib\jndi
+
+modules
+jndi plus
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure_9_3.dtd">
+
+<Configure class="org.eclipse.jetty.webapp.WebAppContext">
+  <Set name="contextPath">/ssm</Set>
+  <Set name="war"><Property name="jetty.webapps" default="."/>/SpringMvc.war</Set>
+
+  <!-- <New id="DSTest" class="org.eclipse.jetty.plus.jndi.Resource">
+     <Arg></Arg>
+     <Arg>jdbc/DSTest</Arg>
+     <Arg>
+      <New class="com.mchange.v2.c3p0.ComboPooledDataSource">
+         <Set name="driverClass">com.ibm.db2.jcc.DB2Driver</Set>
+         <Set name="jdbcUrl">jdbc:db2://10.0.114.99:50008/CBSDB:currentSchema=CBSDB</Set>
+         <Set name="user">cbsjx</Set>
+         <Set name="password">cbsdb123456</Set>
+      </New>
+     </Arg>
+  </New>
+ -->
+  <!-- <New id="DSTest" class="org.eclipse.jetty.plus.jndi.Resource">
+     <Arg></Arg>
+     <Arg>jdbc/DSTest</Arg>
+     <Arg>
+       <New class="com.ibm.db2.jcc.DB2ConnectionPoolDataSource">
+           <Set name="DatabaseName">CBSDB</Set>
+           <Set name="User">cbsjx</Set>
+           <Set name="Password">cbsdb123456</Set>
+           <Set name="ServerName">10.0.114.99</Set>
+           <Set name="PortNumber">50008</Set>
+        </New>
+     </Arg>
+  </New> -->
+
+  <!-- 注意URL末尾逗号 -->
+ <!--  <New id="DSTest" class="org.eclipse.jetty.plus.jndi.Resource">
+     <Arg></Arg>
+     <Arg>jdbc/DSTest</Arg>
+     <Arg>
+         <New class="org.apache.commons.dbcp.BasicDataSource">
+            <Set name="driverClassName">com.ibm.db2.jcc.DB2Driver</Set>
+            <Set name="url">jdbc:db2://10.0.114.99:50008/CBSDB:currentSchema=CBSDB;</Set>
+            <Set name="username">cbsjx</Set>
+            <Set name="password">cbsdb123456</Set>
+         </New>
+     </Arg>
+  </New> -->
+
+   <!-- by Code -->
+  <Get name="errorHandler">
+    <Call name="addErrorPage">
+      <Arg type="int">404</Arg>
+      <Arg type="String">/jspsnoop/ERROR/404</Arg>
+    </Call>
+  </Get>
+
+  <!-- by Exception -->
+  <Get name="errorHandler">
+    <Call name="addErrorPage">
+      <Arg>
+        <Call class="java.lang.Class" name="forName">
+          <Arg type="String">java.io.IOException</Arg>
+        </Call>
+      </Arg>
+      <Arg type="String">/jspsnoop/IOException</Arg>
+    </Call>
+  </Get>
+
+  <!-- by Code Range -->
+  <Get name="errorHandler">
+    <Call name="addErrorPage">
+      <Arg type="int">500</Arg>
+      <Arg type="int">599</Arg>
+      <Arg type="String">/dump/errorCodeRangeMapping</Arg>
+    </Call>
+  </Get>
+</Configure>
+<!--<Configure class="org.eclipse.jetty.quickstart.QuickStartWebApp">
+  <Set name="autoPreconfigure">true</Set>
+</Configure>-->
+

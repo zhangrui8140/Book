@@ -1,0 +1,17 @@
+实用程序shell脚本，以帮助在Unix系统上运行Jetty				bin/
+Jetty基本目录，用于运行带有演示webapps的Jetty服务器 		demo-base/
+Jetty XML配置文件的目录                                 	etc/
+运行Jetty所需的所有JAR文件                              	lib/
+Jetty的许可证文件                  							license-eplv10-aslv20.html
+请求日志的目录                              				logs/
+模块定义目录                                            	modules/
+许可证信息和例外                                   			notice.html
+有用的入门信息      										README.TXT
+包含类路径的其他资源的目录，通过配置激活               		resources/
+包含添加到有效命令行的参数的文件（模块，属性和XML配置文件） start.ini
+调用Jetty的Jar（另请参阅Running Jetty）               		start.jar
+发布信息 													VERSION.txt
+包含在默认配置Jetty下运行的webapp的目录          			webapps/
+
+
+

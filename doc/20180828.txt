@@ -1,0 +1,8 @@
+Jetty加载流程
+1.激活模块 
+java -jar $JETTY_HOME/start.jar --add-to-start=http,webapp,deploy
+2.加载激活模块(可修改模块中属性)
+java -jar $JETTY_HOME/start.jar jetty.http.port=8080
+3.查找激活模块属性(模块可自定义)
+$JETTY_HOME/modules
+4.根据模块属性加载jar包以及etc/xml配置文件(可自定义覆盖)
