@@ -1,0 +1,16 @@
+类加载器
+Bootstrap
+System.getProperty("sun.boot.class.path");
+
+ExtClassLoader
+System.getProperty("java.ext.dirs");
+
+AppClassLoader
+System.getProperty("java.class.path");
+
+继承
+classloader->
+SecureClassLoader->
+URLClassLoader->
+ExtClassLoader,AppClassLoader
+

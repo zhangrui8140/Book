@@ -1,0 +1,28 @@
+TypeReference
+
+-------------------------------
+
+TypeHandlerRegistry
+TypeHandler字典、注册类
+TypeHandlerMap:
+JDBC_TYPE_HANDLER_MAP = new EnumMap<JdbcType, TypeHandler<?>>(JdbcType.class);
+TYPE_HANDLER_MAP = new ConcurrentHashMap<Type, Map<JdbcType, TypeHandler<?>>>();
+UNKNOWN_TYPE_HANDLER = new UnknownTypeHandler(this);
+ALL_TYPE_HANDLERS_MAP = new HashMap<Class<?>, TypeHandler<?>>();
+NULL_TYPE_HANDLER_MAP = Collections.emptyMap();
+defaultEnumTypeHandler = EnumTypeHandler.class;
+-------------------------------
+
+
+BaseTypeHandler
+所有TypeHandler父类
+-------------------------------
+
+TypeHandler
+数据库参数设置
+数据库结果获取
+-------------------------------
+
+TypeReference
+获取泛型类
+-------------------------------

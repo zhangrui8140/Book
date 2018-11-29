@@ -1,0 +1,193 @@
+MyBatis框架
+接口层
+session
+
+核心层
+builder
+-------------
+
+executor
+plugin
+
+parsing
+
+cache
+scripting
+mapping
+binding
+
+datasource
+transaction
+annotations
+---------------
+jdbc
+
+基础层
+exceptions
+io
+logging
+reflection
+type
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MyBatis配置
+
+-------mapper--------
+<select id="唯一标示" parameterType="参数类型" resultType="返回类型"  resultMap=""
+            flushCache="清空本地和二级缓存" useCache="二级缓存" timeout=""
+            fetchSize="" resultSetType="" databaseId="数据库种类"
+            resultOrdered="嵌套结果" resultSets="多结果集"></select>
+
+-----
+<insert id="唯一标示" useGeneratedKeys="true" keyProperty="id">
+        <foreach collection="list" item="item" separator=","></foreach>
+</insert>
+    
+<insert id="">
+    <selectKey>优先执行</selectKey>
+</insert>
+
+<insert id="" parameterType="business.bean.CckzxcsBean">
+        insert into CCKZXCS(DPPMNM,DPPMDS,DPPMVL)
+        values (#{key,javaType=String,jdbcType=VARCHAR,typeHandler=})
+</insert>
+
+-------------
+<resultMap id="CckzxcsBeanResultMap" type="business.bean.CckzxcsBean">
+    <!--复杂对象待测试-->
+    <result column="DPPMNM"  jdbcType="VARCHAR" property="key" />
+    <result column="DPPMDS"  jdbcType="VARCHAR" property="desc" />
+    <result column="DPPMVL"  jdbcType="VARCHAR" property="value" />
+</resultMap>
+
+
+SELECT C.CUCHNM,D.CNTCTP,A.DPACCT,A.CUACNO,
+B.TRCODE,B.TRDATE,B.TRAMOT
+FROM ZCKZHZB A
+INNER JOIN DKHZJXX C ON C.CUSTNO=A.RLCUST
+INNER JOIN DKHDHXX D ON D.CUSTNO=A.RLCUST
+LEFT JOIN MDZSJXX B ON A.CUACNO=B.CUSTAC
+WHERE A.RLCUST='010000000001'
+
+
+private String name;
+private CustomerInfo customerInfo;
+private List<CustomerAccount> tradeList;
+
+<resultMap id="customer" type="business.bean.CustomerBean">
+        <result property="name" column="CUCHNM"></result>
+        <association property="customerInfo" javaType="business.bean.CustomerInfo" column="CUSTNO">
+            <result property="phone" column="CNTCTP"></result>
+        </association>
+
+        <collection property="tradeList" ofType="business.bean.CustomerAccount">
+            <result column="DPACCT" property="dpacct"></result>
+            <result column="CUACNO" property="cuacno"></result>
+            <result column="TRCODE" property="trcode"></result>
+            <result column="TRDATE" property="trdate"></result>
+            <result column="TRAMOT" property="tramot"></result>
+        </collection>
+</resultMap>
+
+----sql
+<sql id="sometable">
+    ${prefix}Table        
+</sql>
+
+<sql id="someinclude">
+    from 
+    <include refid="${include_target}"></include>      
+</sql>
+
+<select id="test">
+    select field
+    <include refid="someinclude">
+        <property name="prefix" value="some"/>
+    </include>
+</select>
+
+
+
+
+
+
+
+
+-------config--------
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE configuration PUBLIC
+        "-//mybatis.org//DTD config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties resource="jdbcTest.properties"></properties>
+
+
+   <!-- <databaseIdProvider type="DB_VENDOR">
+        根据数据库执行不同语句
+        <property name="SQL Server" value="sqlServer"></property>
+        <property name="DB2" value="db2"></property>
+    </databaseIdProvider>-->
+
+
+    <!--<plugins>
+       插件 拦截 SQL方法
+        <plugin interceptor="mybatisSource.Core.ExamplePlugin">
+            <property name="someProperty" value="100"></property>
+        </plugin>
+    </plugins>-->
+
+    <!--创建结果对象实例-->
+    <!--<objectFactory type=""></objectFactory>-->
+
+    <!--<typeHandlers>
+        类型转换
+        <package name="mybatisSource.Basic"></package>
+        &lt;!&ndash;<typeHandler handler="mybatisSource.Basic.ExampleTypeHandler"
+                     javaType="String" jdbcType="VARCHAR"></typeHandler>&ndash;&gt;
+    </typeHandlers>-->
+
+    <!--<typeAliases>
+        别名
+        <typeAlias type=""></typeAlias>
+    </typeAliases>-->
+    
+    <!--<settings>
+        运行时行为
+        <setting name="" value=""/>
+    </settings>-->
+
+    <environments default="dev">
+        <environment id="dev">
+            <transactionManager type="JDBC"></transactionManager>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}" />
+                <property name="url" value="${jdbc.url}" />
+                <property name="username" value="${jdbc.username}" />
+                <property name="password" value="${jdbc.password}" />
+               <!-- <property name="driver" value="com.ibm.db2.jcc.DB2Driver"/>
+                <property name="url" value="jdbc:db2://10.0.114.99:50008/CBSDB:currentSchema=CBSDB;"/>
+                <property name="username" value="cbsjx"/>
+                <property name="password" value="cbsdb123456"/>-->
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <!-- <mapper resource="Tbl_CCKZXCSMapper.xml"></mapper>-->
+        <!--<package name="business.dao"></package>-->
+        <mapper class="business.dao.Tbl_CCKZXCSMapper"></mapper>
+    </mappers>
+</configuration>

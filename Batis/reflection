@@ -1,0 +1,37 @@
+Class:DefaultReflectorFactory 类反射工厂 -> reflectorMap Reflector
+
+
+Class:Reflector 反射类的所有属性
+M:addDefaultConstructor  获取默认构造器
+M:getClassMethods 递归获取类方法
+M:addUniqueMethods 获取非isBradge方法
+M:getSignature 方法名称 java.lang.Long#testMethod:java.lang.String
+M:canAccessPrivateMethods 
+M:addMethodConflict 
+M:resolveGetterConflicts 
+
+
+Class:PropertyNamer 属性名称
+M:methodToProperty 获取get、set方法的属性名称 setId->Id
+
+Class:TypeParameterResolver 查找泛型类型->声明类型
+
+invoker文件夹
+反射 字段get&set 方法调用
+
+
+
+--------------------------------------------
+Note:
+Type体系中类型的包括：
+原始类型(Class)、
+参数化类型(ParameterizedType) 即泛型；例如：List<T>、Map<K,V>等带有参数化的对象
+数组类型(GenericArrayType)、T[] 用来描述ParameterizedType、TypeVariable类型的数组；即List<T>[] 、T[]等
+类型变量(TypeVariable)  泛型中的变量 K V T
+WildcardType 泛型表达式（或者通配符表达式），即？ extend Number、？ super Integer这样的表达式
+
+
+
+
+
+
