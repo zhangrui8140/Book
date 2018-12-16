@@ -11,6 +11,8 @@
     <modules>
         <module>Collection</module>
         <module>DesignPattern</module>
+        <module>IO</module>
+        <module>Thread</module>
     </modules>
 
     <name>Root</name>

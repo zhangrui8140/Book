@@ -8,12 +8,16 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Collection" />
         <module name="DesignPattern" />
+        <module name="IO" />
+        <module name="Thread" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Collection" target="1.7" />
+      <module name="Collection" target="8" />
       <module name="DesignPattern" target="1.7" />
+      <module name="IO" target="1.7" />
       <module name="Root" target="1.7" />
+      <module name="Thread" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>
