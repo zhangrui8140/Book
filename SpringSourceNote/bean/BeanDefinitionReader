@@ -1,0 +1,21 @@
+XmlBeanDefinitionReader
+1.ResourceLoader:PathMatchingResourcePatternResolver,AntPathMatcher
+2.Environment:StandardEnvironment
+3.BeanDefinitionDocumentReader:DefaultBeanDefinitionDocumentReader
+4.DocumentLoader:DefaultDocumentLoader
+5.XmlValidationModeDetector
+6.EntityResolver:ResourceEntityResolver->ResourceLoader
+7.BeanDefinitionHolder
+
+读取资源文件 Resource 注意读取方式是否允许多次读
+加载BeanDefinitionReader 
+需要BeanDefinitionRegistry 
+资源加载器ResourceLoader:PathMatchingResourcePatternResolver,AntPathMatcher
+将资源加载器包装成ResourceEntityResolver
+
+利用xml工具DocumentBuilderFactory+EntityResolver 创建DocumentBuilder
+
+处理Bean的xml文件
+DefaultBeanDefinitionDocumentReader、BeanDefinitionParserDelegate(具体处理)
+
+

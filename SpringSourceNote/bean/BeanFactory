@@ -1,0 +1,153 @@
+BeanFactory
+用于访问Spring bean容器的根接口。
+ *这是bean容器的基本客户端视图;
+ *进一步的接口，如{@link ListableBeanFactory}和
+ * {@link org.springframework.beans.factory.config.ConfigurableBeanFactory}
+ *可用于特定目的。
+ *
+ * <p>此接口由包含许多bean定义的对象实现，
+ *每个都由String名称唯一标识。根据bean的定义，
+ *工厂将返回包含对象的独立实例
+ *（原型设计模式），或单个共享实例（优秀
+ * Singleton设计模式的替代品，实例是a
+ *在工厂范围内的单身人士）。将返回哪种类型的实例
+ *取决于bean工厂配置：API是相同的。从春天开始
+ * 2.0，根据具体应用，可提供更多示波器
+ *上下文（例如，Web环境中的“请求”和“会话”范围）。
+ *
+ * <p>这种方法的重点是BeanFactory是一个中央注册表
+ *应用程序组件，并集中应用程序的配置
+ *组件（不再需要单个对象读取属性文件，
+ * 例如）。参见“Expert One-on-One J2EE Design and。”的第4章和第11章
+ *开发“讨论这种方法的好处。
+ *
+ * <p>请注意，依靠依赖注入通常会更好
+ *（“推送”配置）通过setter配置应用程序对象
+ *或构造函数，而不是使用任何形式的“拉”配置，如
+ * BeanFactory查找。 Spring的依赖注入功能是
+ *使用此BeanFactory接口及其子接口实现。
+ *
+ * <p>通常，BeanFactory将加载存储在配置中的bean定义
+ *源（例如XML文档），并使用{@code org.springframework.beans}
+ *包来配置bean。但是，实现可以简单地返回
+ *它直接在Java代码中创建的Java对象。没有
+ *关于如何存储定义的限制：LDAP，RDBMS，XML，
+ *属性文件等。鼓励实现支持引用
+ *豆类（依赖注入）。
+ *
+ * <p>与{@link ListableBeanFactory}中的方法相比，所有的方法都是如此
+ *此接口中的操作还将检查父工厂（如果是）
+ * {@link HierarchicalBeanFactory}。如果在此工厂实例中找不到bean，
+ *将询问直接的母工厂。这个工厂实例中的豆子
+ *应该在任何父工厂中覆盖同名的bean。
+ *
+ * <p> Bean工厂实现应该支持标准的bean生命周期接口
+ * 越远越好。完整的初始化方法及其标准顺序是：
+ * <ol>
+ * <li> BeanNameAware的{@code setBeanName}
+ * <li> BeanClassLoaderAware的{@code setBeanClassLoader}
+ * <li> BeanFactoryAware的{@code setBeanFactory}
+ * <li> EnvironmentAware的{@code setEnvironment}
+ * <li> EmbeddedValueResolverAware的{@code setEmbeddedValueResolver}
+ * <li> ResourceLoaderAware的{@code setResourceLoader}
+ *（仅在应用程序上下文中运行时适用）
+ * <li> ApplicationEventPublisherAware的{@code setApplicationEventPublisher}
+ *（仅在应用程序上下文中运行时适用）
+ * <li> MessageSourceAware的{@code setMessageSource}
+ *（仅在应用程序上下文中运行时适用）
+ * <li> ApplicationContextAware的{@code setApplicationContext}
+ *（仅在应用程序上下文中运行时适用）
+ * <li> ServletContextAware的{@code setServletContext}
+ *（仅在Web应用程序上下文中运行时适用）
+ * <li> {@ code postProcessBeforeInitialization} BeanPostProcessors的方法
+ * <li> InitializingBean的{@code afterPropertiesSet}
+ * <li>自定义init方法定义
+ * <li> {@ code postProcessAfterInitialization} BeanPostProcessors的方法
+ * </ ol>
+ *
+ * <p>关闭bean工厂时，以下生命周期方法适用：
+ * <ol>
+ * <li> {@ code postProcessBeforeDestruction} DestructionAwareBeanPostProcessors的方法
+ * <li> DisposableBean的{@code destroy}
+ * <li>自定义销毁方法定义
+ * </ ol>
+ *
+
+
+
+ListableBeanFactory
+/ **
+ *由bean工厂实现的{@link BeanFactory}接口的扩展
+ *可以枚举所有bean实例，而不是尝试bean查找
+ *按客户要求逐个名称。 BeanFactory实现了
+ * preload所有的bean定义（如基于XML的工厂）都可以实现
+ *这个界面。
+ *
+ * <p>如果这是{@link HierarchicalBeanFactory}，返回值将<i>不</ i>
+ *考虑任何BeanFactory层次结构，但只涉及bean
+ *在当前工厂中定义。使用{@link BeanFactoryUtils}帮助程序类
+ *也要考虑祖先工厂的豆类。
+ *
+ * <p>此接口中的方法仅尊重此工厂的bean定义。
+ *他们将忽略任何已通过其他方式注册的单例bean
+ * {@link org.springframework.beans.factory.config.ConfigurableBeanFactory}的
+ * {@code registerSingleton}方法，除了
+ * {@code getBeanNamesOfType}和{@code getBeansOfType}将检查
+ *这样的手动注册单身人士。当然，BeanFactory的{@code getBean}
+ *允许透明访问这些特殊的bean。但是，在典型的
+ *场景，所有bean都将由外部bean定义定义，所以大多数
+ *应用程序不需要担心这种差异。
+ *
+ * <p> <b>注意：</ b> {@code getBeanDefinitionCount}除外
+ *和{@code containsBeanDefinition}，此接口中的方法
+ *不适用于频繁调用。实施可能很慢。
+ *
+
+HierarchicalBeanFactory
+**
+  *由bean工厂实现的子接口，可以是其中的一部分
+  *层次结构。
+ *
+  * <p> bean的相应{@code setParentBeanFactory}方法
+  *工厂允许设置父级可配置
+  * fashion可以在ConfigurableBeanFactory接口中找到。
+ *
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DefaultListableBeanFactory
+/ **
+ *默认执行
+ * {@link org.springframework.beans.factory.ListableBeanFactory}和
+ * {@link BeanDefinitionRegistry}接口：一个成熟的bean工厂
+ *基于bean定义对象。
+ *
+ * <p>典型用法是首先注册所有bean定义（可能是读取
+ *访问bean之前，来自bean定义文件）。 Bean定义查找
+ *因此在本地bean定义表中是一个廉价的操作，
+ *在预构建的bean定义元数据对象上运行。
+ *
+ * <p>可以用作独立的bean工厂，也可以用作自定义的超类
+ *豆类工厂。请注意，特定bean定义格式的读者是
+ *通常单独实现，而不是作为bean工厂子类实现：
+ *参见例如{@link PropertiesBeanDefinitionReader}和
+ * {@link org.springframework.beans.factory.xml.XmlBeanDefinitionReader}。
+ *
+ * <p>对于替代实现
+ * {@link org.springframework.beans.factory.ListableBeanFactory}界面，
+ *查看{@link StaticListableBeanFactory}，它管理现有的
+ * bean实例，而不是基于bean定义创建新实例。
+ *
