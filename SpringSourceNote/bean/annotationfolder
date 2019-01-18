@@ -1,0 +1,57 @@
+##with wiringfolder 
+
+AnnotatedBeanDefinition
+AnnotatedGenericBeanDefinition
+
+Value
+
+
+Autowire
+Configurable
+--BeanWiringInfo @Autowire信息 @Configurable信息
+--BeanWiringInfoResolver
+AnnotationBeanWiringInfoResolver 处理Configurable
+
+
+
+Required
+RequiredAnnotationBeanPostProcessor Required检查
+
+Lookup
+Autowired
+InjectionMetadata(InjectedElement)
+AutowiredAnnotationBeanPostProcessor 重要处理
+查找类需要注入的属性元素(字段、方法)Autowired Required
+postProcessPropertyValues 开始注入
+查找与元素匹配bean
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Qualifier
+QualifierAnnotationAutowireCandidateResolver 辅助Autowired查找唯一
+
+BeanFactoryAnnotationUtils
+
+CustomAutowireConfigurer
+
+
+InitDestroyAnnotationBeanPostProcessor bean生命周期 init方法、destroy方法
+
+

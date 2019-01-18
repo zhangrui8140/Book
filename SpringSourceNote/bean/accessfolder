@@ -1,0 +1,4 @@
+多BeanFactory引用
+BeanFactoryLocator
+SingletonBeanFactoryLocator
+BeanFactoryReference

@@ -1,3 +1,14 @@
+BeanDefinitionReader
+AbstractBeanDefinitionReader
+PropertiesBeanDefinitionReader、XmlBeanDefinitionReader
+
+
+
+
+
+
+
+
 XmlBeanDefinitionReader
 1.ResourceLoader:PathMatchingResourcePatternResolver,AntPathMatcher
 2.Environment:StandardEnvironment

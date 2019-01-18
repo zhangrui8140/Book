@@ -1,0 +1,14 @@
+findAnnotation 
+1.Method(BridgedMethod)/AnnotatedElement
+2.Class<?> clazz, Class<A> annotationType
+
+
+@AliasFor AnnotationAttribute提取器
+AnnotationAttributeExtractor
+AbstractAliasAwareAnnotationAttributeExtractor
+DefaultAnnotationAttributeExtractor
+MapAnnotationAttributeExtractor
+
+@AliasFor 识别与处理
+SynthesizedAnnotation
+SynthesizedAnnotationInvocationHandler

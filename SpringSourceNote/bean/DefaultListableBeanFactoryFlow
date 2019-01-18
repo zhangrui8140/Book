@@ -1,0 +1,43 @@
+preInstantiateSingletons(非FactoryBean)
+根据beanName创建或一个新的RootBeanDefinition
+
+优先从DefaultSingletonBeanRegistry拿Singleton
+
+获取Bean的Class
+
+获取MethodOverride
+
+InstantiationAwareBeanPostProcessor--postProcessBeforeInstantiation
+
+doCreateBean 开始创建bean
+
+BeanWrapper 
+                       getFactoryMethodName 
+
+                       PropertyEditorRegistrySupport PropertyEditor
+
+                       autowireConstructor
+
+BeanInstance           FactoryBean
+
+SmartInstantiationAwareBeanPostProcessor--determineCandidateConstructors
+
+MergedBeanDefinitionPostProcessor--postProcessMergedBeanDefinition 处理bean内部
+
+InstantiationAwareBeanPostProcessor--postProcessAfterInstantiation
+
+InstantiationAwareBeanPostProcessor--postProcessPropertyValues
+
+invokeAwareMethods-BeanNameAware、BeanClassLoaderAware、BeanFactoryAware
+
+BeanPostProcessor--postProcessBeforeInitialization
+
+InitializingBean
+
+BeanPostProcessor--postProcessAfterInitialization
+
+DisposableBean
+
+beanInstance完成创建bean
+
+SmartInstantiationAwareBeanPostProcessor--afterSingletonsInstantiated
