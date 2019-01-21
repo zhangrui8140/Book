@@ -1,0 +1,16 @@
+BeanDefinitionVisitor
+
+加载资源读取property
+PropertiesLoaderUtils
+PropertiesLoaderSupport
+
+property资源配置父类
+PropertyResourceConfigurer 决定处理方式
+1.PropertyOverrideConfigurer 处理属性
+
+
+2.PlaceholderConfigurerSupport ${} 属性注入
+PropertyPlaceholderHelper
+PropertyPlaceholderConfigurer
+PropertyPlaceholderConfigurerResolver
+PreferencesPlaceholderConfigurer
