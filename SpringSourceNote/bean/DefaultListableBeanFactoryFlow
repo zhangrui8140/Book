@@ -26,6 +26,8 @@ MergedBeanDefinitionPostProcessor--postProcessMergedBeanDefinition 处理bean内
 
 InstantiationAwareBeanPostProcessor--postProcessAfterInstantiation
 
+AUTOWIRE_BY_NAME/TYPE
+
 InstantiationAwareBeanPostProcessor--postProcessPropertyValues
 
 invokeAwareMethods-BeanNameAware、BeanClassLoaderAware、BeanFactoryAware
