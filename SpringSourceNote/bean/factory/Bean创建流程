@@ -1,3 +1,5 @@
+@Deprecated
+
 Bean创建流程
 AbstractBeanFactory
 

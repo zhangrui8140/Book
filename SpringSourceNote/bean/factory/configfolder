@@ -1,22 +1,28 @@
+工厂Bean 主动创建Bean
+AbstractFactoryBean
+ListFactoryBean
+MapFactoryBean
+SetFactoryBean
+ObjectFactoryCreatingFactoryBean
+ProviderCreatingFactoryBean
+YamlMapFactoryBean --YamlProcessor--YamlPropertiesFactoryBean
+
 AutowireCapableBeanFactory
 
 
 BeanDefinition
-BeanDefinitionCustomizer
 BeanDefinitionHolder
 
 
+BeanDefinitionVisitor 
+PropertyResourceConfigurer
+PlaceholderConfigurerSupport
+PropertyPlaceholderConfigurer
+PreferencesPlaceholderConfigurer
 
 
-
-
-
-EmbeddedValueResolver
 BeanExpressionContext
 BeanExpressionResolver
-
-
-
 BeanFactoryPostProcessor
 BeanPostProcessor
 BeanReference
@@ -28,7 +34,7 @@ CustomScopeConfigurer
 DependencyDescriptor
 DeprecatedBeanWarner
 DestructionAwareBeanPostProcessor
-
+EmbeddedValueResolver
 FieldRetrievingFactoryBean
 InstantiationAwareBeanPostProcessor
 InstantiationAwareBeanPostProcessorAdapter
@@ -37,12 +43,14 @@ MethodInvokingBean
 MethodInvokingFactoryBean
 NamedBeanHolder
 
+package-info.java
+
 
 PropertiesFactoryBean
 PropertyOverrideConfigurer
 PropertyPathFactoryBean
 
-PropertyResourceConfigurer
+
 
 RuntimeBeanNameReference
 RuntimeBeanReference
@@ -52,3 +60,4 @@ ServiceLocatorFactoryBean
 SingletonBeanRegistry
 SmartInstantiationAwareBeanPostProcessor
 TypedStringValue
+

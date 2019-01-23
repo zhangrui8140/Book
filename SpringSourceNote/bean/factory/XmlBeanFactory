@@ -1,0 +1,23 @@
+xml属性加载流程
+BeanDefinitionParserDelegate --> BeanDefinitionHolder
+beans属性 赋默认值  profile
+-----------------------------------------
+bean:
+id name 
+class   ->AbstractBeanDefinition(GenericBeanDefinition)
+scope abstract ...
+description
+meta
+lookup
+replace
+constructor-arg
+qualifier
+decorateBeanDefinitionIfRequired spring-handler util-map
+-----------------------------------------
+import
+-----------------------------------------
+alias
+-----------------------------------------
+-----------------------------------------
+
+
