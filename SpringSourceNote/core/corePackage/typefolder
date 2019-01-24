@@ -1,0 +1,51 @@
+1.MetadataReaderFactory
+2.visitor使用递归方法
+
+
+
+--类文件原数据读取asm
+MetadataReader
+SimpleMetadataReader
+	
+MetadataReaderFactory
+SimpleMetadataReaderFactory 
+CachingMetadataReaderFactory
+------------------------------------------------
+AbstractRecursiveAnnotationVisitor --递归
+
+RecursiveAnnotationArrayVisitor
+
+RecursiveAnnotationAttributesVisitor
+AnnotationAttributesReadingVisitor
+---------------------------------------------------
+AnnotatedTypeMetadata
+
+AnnotationMetadata
+ClassMetadata  StandardClassMetadata  StandardAnnotationMetadata
+ClassMetadataReadingVisitor
+AnnotationMetadataReadingVisitor
+
+MethodMetadata StandardMethodMetadata
+MethodMetadataReadingVisitor
+---------------------------------------------------
+AnnotationReadingVisitorUtils
+
+--------------------------------------
+@Inherited对	接口无效
+filter
+	AbstractClassTestingTypeFilter
+	AbstractTypeHierarchyTraversingFilter
+	AnnotationTypeFilter
+	AspectJTypeFilter
+	AssignableTypeFilter
+	package-info.java
+	RegexPatternTypeFilter
+	TypeFilter
+
+---------------------------------------------------
+
+
+
+
+
+

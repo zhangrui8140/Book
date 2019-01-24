@@ -1,0 +1,43 @@
+PropertyResolver--属性获取处理
+
+Environment--profile
+ConfigurableEnvironment--配置 profile+ConversionService
+AbstractEnvironment --（获取系统环境失败 返回ReadOnlySystemAttributesMap）
+StandardEnvironment
+
+ConfigurablePropertyResolver--连接配置ConversionService
+AbstractPropertyResolver
+PropertySourcesPropertyResolver
+----------------------------------------------
+PropertySource
+EnumerablePropertySource
+
+MapPropertySource
+PropertiesPropertySource
+SystemEnvironmentPropertySource
+
+处理 带--前缀属性
+CommandLinePropertySource
+JOptCommandLinePropertySource  
+SimpleCommandLinePropertySource  CommandLineArgs   SimpleCommandLineArgsParser
+
+CompositePropertySource --合并PropertySource
+
+PropertySources --PropertySource容器
+MutablePropertySources
+
+----------------------------------------------
+对外环境
+EnvironmentCapable
+
+----------------------------------------------
+
+
+MissingRequiredPropertiesException
+
+
+
+
+
+
+
