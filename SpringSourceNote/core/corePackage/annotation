@@ -1,3 +1,43 @@
+AnnotationAttributeExtractor
+AbstractAliasAwareAnnotationAttributeExtractor
+MapAnnotationAttributeExtractor       -- @AliasFor 指向某个Annotation的属性或者关联其他属性
+Map可以预存属性值并进行数组转换等
+DefaultAnnotationAttributeExtractor
+------------------------------------------------------------------------
+AnnotationAttributes
+AnnotatedElementUtils
+AnnotationUtils
+------------------------------------------------------------------------
+Order
+OrderUtils
+AnnotationAwareOrderComparator
+------------------------------------------------------------------------
+AnnotationConfigurationException
+------------------------------------------------------------------------
+SynthesizedAnnotation  ---提供Proxy for @AliasFor
+SynthesizedAnnotationInvocationHandler
+SynthesizingMethodParameter
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------
 findAnnotation 
 1.Method(BridgedMethod)/AnnotatedElement
 2.Class<?> clazz, Class<A> annotationType

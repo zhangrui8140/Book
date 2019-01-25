@@ -1,0 +1,12 @@
+1.annotation属性提取
+@Retention(RetentionPolicy.RUNTIME)
+@interface ContextConfig {
+
+	@AliasFor("location")
+	String value() default "";
+
+	@AliasFor("value")
+	String location() default "";
+
+	Class<?> klass() default Object.class;
+}
