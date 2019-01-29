@@ -6,7 +6,12 @@ DefaultAnnotationAttributeExtractor
 ------------------------------------------------------------------------
 AnnotationAttributes
 AnnotatedElementUtils
+1.class本身的anno
+2.获取inherited
+3.
+
 AnnotationUtils
+
 ------------------------------------------------------------------------
 Order
 OrderUtils

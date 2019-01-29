@@ -1,0 +1,64 @@
+<beans>
+
+	<bean id="someMessageSource" name="yourMessageSource"
+			class="org.springframework.context.support.StaticMessageSource"/>
+
+	<bean class="org.springframework.context.support.ClassPathXmlApplicationContext" lazy-init="true">
+		<constructor-arg value="someNonExistentFile.xml"/>
+	</bean>
+
+</beans>
+------------------------------------------------------------------------------------
+ApplicationContext
+继承接口
+1.BeanFactory ListableBeanFactory HierarchicalBeanFactory bean工厂基本操作
+2.EnvironmentCapable 系统环境
+3.ApplicationEventPublisher 事件发布 listener
+4.ResourcePatternResolver PathMatchingResourcePatternResolver
+5.MessageSource
+------------------------------------------------------------------------------------
+ConfigurableApplicationContext
+1.Lifecycle 
+2.Closeable
+
+------------------------------------------------------------------------------------
+AbstractApplicationContext 继承DefaultResourceLoader 资源加载器
+
+1.DefaultResourceLoader(class)
+2.DisposableBean
+------------------------------------------------------------------------------------
+AbstractRefreshableApplicationContext
+
+------------------------------------------------------------------------------------
+AbstractRefreshableConfigApplicationContext （DefaultListableBeanFactory）
+1.BeanNameAware
+2.InitializingBean
+------------------------------------------------------------------------------------
+ClassPathXmlApplicationContext
+流程
+资源加载器初始化
+获取Environment 路径处理（placeHolder）
+校验Env（必须属性是否存在）
+创建DefaultListableBeanFactory 初始化自定义参数
+初始化 XmlBeanDefinitionReader loadBeanDefinitions
+初始化DefaultListableBeanFactory属性 注册 addBeanPostProcessor ...
+加载自定义factory PostProcessors
+加载自定义Bean PostProcessors
+initMessageSource 注册MessageSource
+initApplicationEventMulticaster  注册applicationEventMulticaster
+注册监听器 和earlyApplicationEvents 并放置于applicationEventMulticaster
+初始化完成DefaultListableBeanFactory LoadTimeWeaverAware
+初始化非lazyBean
+initLifecycleProcessor
+寻找 Lifecycle 继承Bean 
+发布事件
+关闭
+发布关闭事件
+Lifecycle 关闭
+
+
+
+
+
+
+
