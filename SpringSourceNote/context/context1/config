@@ -1,0 +1,20 @@
+/**
+ * Support package for advanced application context configuration,
+ * with XML schema being the primary configuration format.
+ */
+ ContextNamespaceHandler
+ 处理xml中NamespaceHandler 例如 component-scan
+----------------------------------------------------------------------
+
+AbstractPropertyLoadingBeanDefinitionParser
+
+PropertyOverrideBeanDefinitionParser
+PropertyPlaceholderBeanDefinitionParser
+
+LoadTimeWeaverBeanDefinitionParser
+MBeanExportBeanDefinitionParser
+MBeanServerBeanDefinitionParser
+SpringConfiguredBeanDefinitionParser
+
+
+
