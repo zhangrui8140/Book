@@ -1,0 +1,59 @@
+/**
+ * Annotations and supporting classes for declarative cache management.
+ * Hooked into Spring's cache interception infrastructure via
+ * {@link org.springframework.cache.interceptor.CacheOperationSource}.
+ */
+
+
+
+
+AnnotationCacheOperationSource
+------------------------------------------------------------------------------------
+根据EnableCaching Import CachingConfigurationSelector
+导入PROXY|ASPECTJ
+
+@EnableCaching
+
+AbstractCachingConfiguration
+ProxyCachingConfiguration
+
+CachingConfigurationSelector
+
+
+------------------------------------------------------------------------------------
+Cacheable
+CacheConfig
+CacheEvict
+CachePut
+Caching
+
+CacheAnnotationParser
+SpringCacheAnnotationParser
+
+
+------------------------------------------------------------------------------------
+CachingConfigurer
+CachingConfigurerSupport
+
+------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+package-info.java
+

@@ -1,0 +1,27 @@
+
+/**
+ * Contains support classes for connecting to local and remote {@code MBeanServer}s
+ * and for exposing an {@code MBeanServer} to remote clients.
+ */
+------------------------------------------------------------------------------------
+MBeanRegistrationSupport
+ConnectorServerFactoryBean
+------------------------------------------------------------------------------------
+不同Server 连接方式工具不同
+MBeanServerConnectionFactoryBean  -》MBeanServerConnection
+
+MBeanServerFactoryBean 			-》MBeanServer
+WebSphereMBeanServerFactoryBean -》MBeanServer
+------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------
+
+JmxUtils
+
+MetricType
+
+NotificationListenerHolder
+
+ObjectNameManager
+
+RegistrationPolicy
