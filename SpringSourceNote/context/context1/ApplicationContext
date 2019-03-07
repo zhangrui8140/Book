@@ -55,10 +55,84 @@ initLifecycleProcessor
 关闭
 发布关闭事件
 Lifecycle 关闭
+------------------------------------------------------------
+refresh流程
 
+1.prepareRefresh（）
+-Initialize any placeholder property sources in the context environment
+当前环境placeholder属性初始化
 
+-getEnvironment().validateRequiredProperties()
+获取当前环境 校验需要的属性
 
+2.prepareBeanFactory（）
+-Configure the factory's standard context characteristics,
+such as the context's ClassLoader and post-processors.
+初始化BeanFactory 注册ClassLoader post-processors 等
 
+3.postProcessBeanFactory(beanFactory);
+-给context子类注册需要的 post-processors 等
+
+4.invokeBeanFactoryPostProcessors(beanFactory)
+BeanDefinitionRegistryPostProcessor
+// First, invoke the BeanDefinitionRegistryPostProcessors that implement PriorityOrdered.
+// Next, invoke the BeanDefinitionRegistryPostProcessors that implement Ordered.
+// Finally, invoke all other BeanDefinitionRegistryPostProcessors until no further ones appear.
+
+BeanDefinitionRegistryPostProcessor BeanFactoryPostProcessor 两个接口
+BeanFactoryPostProcessor 单独接口
+-----------------------------------------------------------------------------
+BeanFactoryPostProcessor
+// Separate between BeanFactoryPostProcessors that implement PriorityOrdered,Ordered, and the rest.
+区分 PriorityOrdered  Ordered  和剩余的
+// First, invoke the BeanFactoryPostProcessors that implement PriorityOrdered.
+// Next, invoke the BeanFactoryPostProcessors that implement Ordered.
+
+5.registerBeanPostProcessors(beanFactory);
+添加 BeanPostProcessorChecker
+
+// Separate between BeanPostProcessors that implement PriorityOrdered,
+// Ordered, and the rest.
+区分三个PriorityOrdered  Ordered  the rest 
+BeanPostProcessors后 
+依次注册BeanPostProcessor 
+BeanPostProcessor-》
+
+// Finally, re-register all internal BeanPostProcessors.
+MergedBeanDefinitionPostProcessor
+
+6.initMessageSource()
+初始化messageSource Bean
+
+7.initApplicationEventMulticaster()
+注册 默认 SimpleApplicationEventMulticaster 事件广播器
+
+8.onRefresh()
+Initialize other special beans in specific context subclasses.
+
+9.registerListeners()
+ApplicationEventMulticaster上注册监听Listeners 只做添加
+// Do not initialize FactoryBeans here: We need to leave all regular beans
+uninitialized to let post-processors apply to them!
+
+10.finishBeanFactoryInitialization(beanFactory)
+-ConversionService
+Initialize conversion service for this context.
+
+-LoadTimeWeaverAware
+Initialize LoadTimeWeaverAware beans early to allow for registering their transformers early.
+
+-preInstantiateSingletons
+Instantiate all remaining (non-lazy-init) singletons. 创建Bean 自定义
+
+11.finishRefresh()
+initLifecycleProcessor
+
+开始 Propagate refresh to lifecycle processor first.
+
+Publish the final event. new ContextRefreshedEvent
+
+LiveBeansView.registerApplicationContext(this);
 
 
 

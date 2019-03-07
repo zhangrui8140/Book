@@ -1,0 +1,36 @@
+
+
+ConcurrentTaskExecutor -》ManagedExecutorService extends ExecutorService
+TaskExecutorAdapter =》AsyncListenableTaskExecutor
+ManagedTaskExecutorAdapter
+FinalizableDelegatedExecutorService =》DelegatedExecutorService（Executors）
+ThreadPoolExecutor =》extends AbstractExecutorService
+
+ConcurrentTaskScheduler
+
+DefaultManagedTaskExecutor   利用JNDI 管理线程池
+DefaultManagedTaskScheduler
+-------------------------------------------------------------------
+
+CustomizableThreadFactory
+
+DefaultManagedAwareThreadFactory
+
+ExecutorConfigurationSupport
+ScheduledExecutorFactoryBean
+ThreadPoolExecutorFactoryBean
+ThreadPoolTaskExecutor
+ThreadPoolTaskScheduler
+-------------------------------------------------------------------
+
+ForkJoinPoolFactoryBean
+ReschedulingRunnable
+ScheduledExecutorTask
+
+
+
+
+
+
+
+

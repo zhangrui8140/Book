@@ -1,0 +1,20 @@
+
+Executor
+TaskExecutor
+-----------------------------------------------------------
+SyncTaskExecutor 同步
+-----------------------------------------------------------
+AsyncTaskExecutor
+AsyncListenableTaskExecutor
+SimpleAsyncTaskExecutor  -》CustomizableThreadCreator
+TaskExecutorAdapter
+-----------------------------------------------------------
+ConcurrentExecutorAdapter -》  Executor
+
+ExecutorServiceAdapter -》AbstractExecutorService
+-----------------------------------------------------------
+
+TaskDecorator
+
+TaskRejectedException
+TaskTimeoutException

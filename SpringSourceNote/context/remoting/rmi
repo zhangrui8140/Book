@@ -1,0 +1,38 @@
+/**
+ * Remoting classes for conventional RMI and transparent remoting via
+ * RMI invokers. Provides a proxy factory for accessing RMI services,
+ * and an exporter for making beans available to RMI clients.
+ */
+---------------------------------------------------------------
+RmiBasedExporter
+
+JndiRmiClientInterceptor
+JndiRmiProxyFactoryBean
+JndiRmiServiceExporter
+
+
+RmiServiceExporter
+RmiProxyFactoryBean
+RmiRegistryFactoryBean
+
+RmiClientInterceptor
+RmiClientInterceptorUtils
+
+
+---------------------------------------------------------------
+RmiInvocationHandler
+RmiInvocationWrapper
+---------------------------------------------------------------
+
+---------------------------------------------------------------
+
+
+---------------------------------------------------------------
+
+
+---------------------------------------------------------------
+
+CodebaseAwareObjectInputStream
+RemoteInvocationSerializingExporter
+
+
