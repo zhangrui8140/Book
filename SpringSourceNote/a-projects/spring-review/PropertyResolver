@@ -1,0 +1,29 @@
+PropertyResolver 
+资源获取与处理
+
+ConfigurablePropertyResolver 
+提供ConfigurableConversionService
+资源配置化 解析、转换 
+
+AbstractPropertyResolver
+提供PropertyPlaceholderHelper
+接口实现 资源配置化解析 资源获取与处理
+
+PropertySourcesPropertyResolver
+资源处理
+-----------------------------------------------------------------
+PropertyResolver 
+资源获取与处理
+
+Environment
+profile环境设置
+
+ConfigurableEnvironment
+配置环境与系统资源获取
+
+AbstractEnvironment
+利用PropertySourcesPropertyResolver处理资源
+
+
+StandardEnvironment
+系统资源获取

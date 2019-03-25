@@ -1,0 +1,35 @@
+PropertiesLoaderSupport
+多资源属性获取（.xml的属性文件）
+
+PropertiesFactoryBean
+a properties file 作为一个 FactoryBeanbean 
+（将此暴露出去 利用JMX监测）
+-----------------------------------------------------------
+PropertiesLoaderSupport
+多资源属性获取
+
+PropertyResourceConfigurer
+提供BeanFactoryPostProcessor
+对BeanFactory进行属性加载 读取内部bean属性
+
+PropertyOverrideConfigurer
+bean属性覆盖 beanName.property=value
+
+PropertyOverrideBeanDefinitionParser <context:property-override>
+（读取xml文件，注册BeanFactory，执行BeanFactoryPost 加载Bean属性）
+-----------------------------------------------------------
+PropertiesLoaderSupport
+多资源属性获取
+
+PropertyResourceConfigurer
+提供BeanFactoryPostProcessor
+对BeanFactory进行属性加载 读取内部bean属性
+
+PlaceholderConfigurerSupport
+提供${...}属性获取
+
+PropertyPlaceholderConfigurer | PropertySourcesPlaceholderConfigurer
+提供${...}属性获取
+System  properties            | Envirment  PropertySources
+
+<context:property-placeholder/>

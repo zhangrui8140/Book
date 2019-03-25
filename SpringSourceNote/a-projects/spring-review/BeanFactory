@@ -1,0 +1,24 @@
+BeanFactory
+提供获取bean功能
+
+HierarchicalBeanFactory
+查询ParentBeanFactory和containsLocalBean
+
+SingletonBeanRegistry
+SingletonBean注册器
+
+ConfigurableBeanFactory
+Provides facilities to configure a bean factory
+
+
+ListableBeanFactory
+列举 bean definitions 对象
+
+ConfigurableListableBeanFactory
+it provides facilities to
+analyze and modify bean definitions, 
+and to pre-instantiate singletons.
+
+
+AbstractBeanFactory
+单bean工厂的

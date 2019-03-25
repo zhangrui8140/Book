@@ -1,0 +1,8 @@
+三种转换器
+Converter、ConverterFactory、
+适配器转为
+ConditionalGenericConverter
+
+转换注册器
+GenericConversionService
+

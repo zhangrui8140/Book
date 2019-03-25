@@ -6,6 +6,10 @@ Async
 AsyncAnnotationAdvisor
 AsyncResult
 AsyncAnnotationBeanPostProcessor
+
+Async执行需要Executor 默认 SimpleAsyncTaskExecutor
+
+
 -------------------------------------------------------------------
 
 -------------------------------------------------------------------

@@ -1,0 +1,18 @@
+Annotation
+
+
+AbstractAliasAwareAnnotationAttributeExtractor
+Annotation属性提取器
+
+DefaultAnnotationAttributeExtractor
+从Annotation中读取 属性Map（AliasFor 属性对应）
+
+MapAnnotationAttributeExtractor
+将属性Map（AliasFor 属性对应）加载为map数据源 
+
+SynthesizedAnnotation
+识别唯一接口
+SynthesizedAnnotationInvocationHandler
+针对（AliasFor 属性对应） 将提取器作为数据源 提供接口暴露为代理做出处理 
+
+------------------------------------------------------------------------
