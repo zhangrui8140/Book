@@ -1,0 +1,56 @@
+1.类加载过程
+查找是否加载由下到上 加载由上到下
+
+①Bootstrap ClassLoader
+
+负责加载$JAVA_HOME中jre/lib/rt.jar里所有的class，由C++实现，不是ClassLoader子类
+
+②Extension ClassLoader
+
+负责加载java平台中扩展功能的一些jar包，包括$JAVA_HOME中jre/lib/*.jar或-Djava.ext.dirs指定目录下的jar包
+
+③App ClassLoader
+
+负责记载classpath中指定的jar包及目录中class
+
+④Custom ClassLoader
+
+属于应用程序根据自身需要自定义的ClassLoader，如tomcat、jboss都会根据j2ee规范自行实现ClassLoader
+
+2.java内存模型
+JVM内存结构分为：
+方法区（method），可通过-XX:PermSize和-XX:MaxPermSize来指定最小值和最大值。
+栈内存（stack），
+堆内存（heap）， 其大小可以通过-Xmx和-Xms来控制
+本地方法栈（java中的jni调用）
+
+3.垃圾回收机制
+堆里聚集了所有由应用程序创建的对象，JVM也有对应的指令比如 new, newarray, anewarray和multianewarray，然并没有向 C++ 的 delete，free 等释放空间的指令，Java的所有释放都由 GC 来做，GC除了做回收内存之外，另外一个重要的工作就是内存的压缩，这个在其他的语言中也有类似的实现，相比 C++ 不仅好用，而且增加了安全性，当然她也有弊端，比如性能这个大问题。
+
+何时会抛出OutOfMemoryException，并不是内存被耗空的时候才抛出
+JVM98%的时间都花费在内存回收
+每次回收的内存小于2%
+  满足这两个条件将触发OutOfMemoryException，这将会留给系统一个微小的间隙以做一些Down之前的操作，比如手动打印Heap Dump。
+
+4.JVM内存回收
+把对象分为
+年青代(Young)、-Xmn设置  默认堆大小的1/15  minor gc  标记-清理算法
+年老代(Tenured)、 Full GC -Xmx和-Xms  复制算法
+持久代(Perm)  方法区  full GC  放着类、方法的定义，jvm Stack区域放着方法参数、局域变量等的引用
+堆被划分成两个不同的区域：新生代 ( Young )、老年代 ( Old)。新生代 ( Young ) 又被划分为三个区域：Eden、S0、S1。 这样划分的目的是为了使 JVM 能够更好的管理堆内存中的对象，包括内存的分配以及回收。
+Java 中的堆也是 GC 收集垃圾的主要区域。GC 分为两种：Minor GC、Full GC
+
+-Xms	初始堆的分配大小，默认为物理内存的六十四分之一	
+-Xmx	堆的最大分配大小（默认为物理内存的四分之一）	
+-Xmn	新生代的大小
+
+-Xms8m -Xmx8m -XX:+PrintGCDetails 
+参数是一次设置最大分配8M，初始分配也是8M，并且打印GC的信息 
+
+5.Jvm区域总体分两类
+heap区和非heap区。
+heap区又分：Eden Space（伊甸园）、Survivor Space(幸存者区)、Tenured Gen（老年代-养老区）。 
+非heap区又分：Code Cache(代码缓存区)、Perm Gen（永久代）、Jvm Stack(java虚拟机栈)、Local Method Statck(本地方法栈)。
+
+6.工具使用
+jps, jstack, jmap, jconsole, jinfo, jhat, javap，jprofile
