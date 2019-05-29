@@ -1,0 +1,5 @@
+ClassDefinition
+ClassFileTransformer
+IllegalClassFormatException
+Instrumentation
+UnmodifiableClassException

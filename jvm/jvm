@@ -32,6 +32,15 @@ JVM98%的时间都花费在内存回收
 每次回收的内存小于2%
   满足这两个条件将触发OutOfMemoryException，这将会留给系统一个微小的间隙以做一些Down之前的操作，比如手动打印Heap Dump。
 
+
+-XX:+PrintGC 输出GC日志
+-verbose:gc 示输出虚拟机中GC的详细情况
+-XX:+PrintGCDetails 输出GC的详细日志
+-XX:+PrintGCTimeStamps 输出GC的时间戳（以基准时间的形式）
+-XX:+PrintGCDateStamps 输出GC的时间戳（以日期的形式，如 2013-05-04T21:53:59.234+0800）
+-XX:+PrintHeapAtGC 在进行GC的前后打印出堆的信息
+-Xloggc:../logs/gc.log 日志文件的输出路径
+
 4.JVM内存回收
 把对象分为
 年青代(Young)、-Xmn设置  默认堆大小的1/15  minor gc  标记-清理算法
@@ -47,10 +56,25 @@ Java 中的堆也是 GC 收集垃圾的主要区域。GC 分为两种：Minor GC
 -Xms8m -Xmx8m -XX:+PrintGCDetails 
 参数是一次设置最大分配8M，初始分配也是8M，并且打印GC的信息 
 
+JVM有三种垃圾回收器，分别是throughput collector，用来做并行young generation回收，由参数-XX:+UseParallelGC启动；
+concurrent low pause collector，用来做tenured generation并发回收，由参数-XX:+UseConcMarkSweepGC启动；incremental low pause collector，可以认为是默认的垃圾回收器。不建议直接使用某种垃圾回收器，最好让JVM自己决断，除非自己有足够的把握。
+
+
+从最强到最弱，不同的引用（可到达性）级别反映了对象的生命周期。
+
+l  Strong Ref(强引用)：通常我们编写的代码都是Strong Ref，于此对应的是强可达性，只有去掉强可达，对象才被回收。
+
+l  Soft Ref(软引用)：对应软可达性，只要有足够的内存，就一直保持对象，直到发现内存吃紧且没有Strong Ref时才回收对象。一般可用来实现缓存，通过java.lang.ref.SoftReference类实现。
+
+l  Weak Ref(弱引用)：比Soft Ref更弱，当发现不存在Strong Ref时，立刻回收对象而不必等到内存吃紧的时候。通过java.lang.ref.WeakReference和java.util.WeakHashMap类实现。
+
+l  Phantom Ref(虚引用)：根本不会在内存中保持任何对象，你只能使用Phantom Ref本身。一般用于在进入finalize()方法后进行特殊的清理过程，通过java.lang.ref.PhantomReference实现。
+
+
 5.Jvm区域总体分两类
 heap区和非heap区。
 heap区又分：Eden Space（伊甸园）、Survivor Space(幸存者区)、Tenured Gen（老年代-养老区）。 
 非heap区又分：Code Cache(代码缓存区)、Perm Gen（永久代）、Jvm Stack(java虚拟机栈)、Local Method Statck(本地方法栈)。
 
 6.工具使用
-jps, jstack, jmap, jconsole, jinfo, jhat, javap，jprofile
+jps, jstack, jmap, jconsole, jinfo, jhat, javap，jprofiler
