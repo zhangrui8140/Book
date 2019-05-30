@@ -1,12 +1,12 @@
 Annotation
 AnnotationFormatError
 AnnotationTypeMismatchException
-Documented
+Documented:javadoc 文档生成
 ElementType
 IncompleteAnnotationException
-Inherited
-Native
+Inherited:class 继承
+Native:
 Repeatable
-Retention
-RetentionPolicy
+Retention：RetentionPolicy 
+RetentionPolicy:source(编译处理) class（classfile中） runtime（vm find）
 Target
