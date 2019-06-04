@@ -1,0 +1,9 @@
+DefaultThreadFactory 
+	ThreadFactory  ThreadGroup
+
+ThreadPerTaskExecutor
+	DefaultThreadFactory
+
+创建worker线程 NioEventLoop
+
+工人选择 DefaultEventExecutorChooserFactory
