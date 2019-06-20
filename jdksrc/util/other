@@ -16,6 +16,9 @@ Dictionary
 LinkedHashMap
 LinkedHashSet
 LinkedList
+
+RandomAccess
+
 List
 ListIterator
 HashMap
@@ -23,6 +26,7 @@ HashSet
 Hashtable
 IdentityHashMap
 Vector
+Stack
 WeakHashMap
 
 Set
@@ -38,6 +42,9 @@ EnumMap
 EnumSet
 JumboEnumSet
 RegularEnumSet
+
+Queue
+PriorityQueue
 -------------------------------------------------------------
 Arrays
 DualPivotQuicksort
@@ -67,6 +74,7 @@ DateFormat
 Calendar
 Date
 TimeZone
+SimpleTimeZone
 GregorianCalendar
 JapaneseImperialCalendar
 Formattable
@@ -97,35 +105,38 @@ OptionalDouble
 OptionalInt
 OptionalLong
 -------------------------------------------------------------
-
-PrimitiveIterator
-PriorityQueue
+属性校验
 Properties
 PropertyPermission
 PropertyPermissionCollection
-
-Queue
-Random
-RandomAccess
+-------------------------------------------------------------
 
 
-Scanner
 ServiceConfigurationError
 ServiceLoader
-
-SimpleTimeZone
+------------------------------------------------------------
 
 Spliterator
 Spliterators
-SplittableRandom
-Stack
-StringJoiner
+
+------------------------------------------------------------
+
+Scanner
 StringTokenizer
+-------------------------------------------------------------
+
 TaskQueue
 Timer
 TimerTask
 TimerThread
+------------------------------------------------------------
 
-TooManyListenersException
-Tripwire
 UUID
+-------------------------------------------------------------
+
+PrimitiveIterator
+
+Random
+SplittableRandom
+
+Tripwire
