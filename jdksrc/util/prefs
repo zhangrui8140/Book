@@ -1,0 +1,14 @@
+---注册表---键值对
+AbstractPreferences
+BackingStoreException
+Base64
+InvalidPreferencesFormatException
+NodeChangeEvent
+NodeChangeListener
+PreferenceChangeEvent
+PreferenceChangeListener
+Preferences
+PreferencesFactory
+WindowsPreferences
+WindowsPreferencesFactory
+XmlSupport
