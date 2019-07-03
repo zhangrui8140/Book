@@ -1,36 +1,58 @@
+AnnotatedElement  
+Member 
 
-Member
 Field
+
+GenericDeclaration  
 Executable
 Constructor
 Method
+------------------------------------
+Modifier 
+-------
+public 
+protected 
+private 
+/* Canonical order */
+abstract 
+static 
+final 
+transient  序列化忽略
+volatile  禁止指令重排序优化 非原子操作不适用  多线程共享变量 
+synchronized 
+native 
+strictfp  --浮点运算更加精确，而且不会因为不同的硬件平台所执行的结果不一致的话，可以用关键字strictfp
+interface 
+
+bridge   --泛型自动生成方法  
+varargs   string...
+synthetic class$1  自动生成 非匿名  access$100 用于内部类访问外部类的数据成员时使用. ???
+annotation  class
+enum      
+mandated  ???
+
+------------------------------------
+Array --dynamically create and access Java arrays. 
+
+------------------------------------
+Type
+TypeVariable  
+ParameterizedType
+WildcardType
+GenericArrayType
 
 
-AccessibleObject
+AnnotatedType   --public List<@MyTypeAnnotation ? extends String>[] listAnnotationTypeArray;
 AnnotatedArrayType
-AnnotatedElement
 AnnotatedParameterizedType
-AnnotatedType
 AnnotatedTypeVariable
 AnnotatedWildcardType
-Array
-
-GenericArrayType
-GenericDeclaration
-GenericSignatureFormatError
+------------------------------------
+WeakCache
 InvocationHandler
-InvocationTargetException
-MalformedParameterizedTypeException
-MalformedParametersException
-
-Modifier
-Parameter
-ParameterizedType
 Proxy
+--------------------------------------
 ReflectAccess
 ReflectPermission
-Type
-TypeVariable
-UndeclaredThrowableException
-WeakCache
-WildcardType
+
+
