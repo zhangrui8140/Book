@@ -1,0 +1,39 @@
+jps, jstack, jmap, jconsole, jinfo, jhat, javap
+
+javap
+
+
+工具使用 jps, jstack, jmap, jconsole, jinfo, jhat, javap，jprofiler
+jps，JVM Process Status Tool,显示指定系统内所有的HotSpot虚拟机进程。
+jstat，JVM statistics Monitoring是用于监视虚拟机运行时状态信息的命令，它可以显示出虚拟机进程中的类装载、内存、垃圾收集、JIT编译等运行数据。
+option： 参数选项
+-class                 显示ClassLoad的相关信息；
+-compiler           显示JIT编译的相关信息；
+-gc                     显示和gc相关的堆信息；
+-gccapacity 　　  显示各个代的容量以及使用情况；
+-gcmetacapacity 显示metaspace的大小
+-gcnew               显示新生代信息；
+-gcnewcapacity  显示新生代大小和使用情况；
+-gcold                 显示老年代和永久代的信息；
+-gcoldcapacity    显示老年代的大小；
+-gcutil　　           显示垃圾收集信息；
+-gccause             显示垃圾回收的相关信息（通-gcutil）,同时显示最后一次或当前正在发生的垃圾回收的诱因；
+-printcompilation 输出JIT编译的方法信息；
+
+
+-t： 可以在打印的列加上Timestamp列，用于显示系统运行的时间
+
+-h： 可以在周期性数据数据的时候，可以在指定输出多少行以后输出一次表头
+
+vmid： Virtual Machine ID（ 进程的 pid）
+
+interval： 执行每次的间隔时间，单位为毫秒
+
+count： 用于指定输出多少次记录，缺省则会一直打印
+
+
+
+jmap，JVM Memory Map命令用于生成heap dump文件
+jhat，JVM Heap Analysis Tool命令是与jmap搭配使用，用来分析jmap生成的dump，jhat内置了一个微型的HTTP/HTML服务器，生成dump的分析结果后，可以在浏览器中查看
+jstack，用于生成java虚拟机当前时刻的线程快照。
+jinfo，JVM Configuration info 这个命令作用是实时查看和调整虚拟机运行参数。
