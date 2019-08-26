@@ -1,0 +1,16 @@
+
+find 路径 （/） A   B
+
+A:
+-name  *文件名*
+-path 
+-type 
+
+B:
+-exec 执行其他命令
+
+
+
+ 
+
+

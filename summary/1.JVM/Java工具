@@ -37,3 +37,7 @@ jmap，JVM Memory Map命令用于生成heap dump文件
 jhat，JVM Heap Analysis Tool命令是与jmap搭配使用，用来分析jmap生成的dump，jhat内置了一个微型的HTTP/HTML服务器，生成dump的分析结果后，可以在浏览器中查看
 jstack，用于生成java虚拟机当前时刻的线程快照。
 jinfo，JVM Configuration info 这个命令作用是实时查看和调整虚拟机运行参数。
+
+
+---------------
+1.性能调优
