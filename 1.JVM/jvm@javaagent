@@ -1,0 +1,10 @@
+javaagent 的主要功能如下：
+可以在加载 class 文件之前做拦截，对字节码做修改
+可以在运行期对已加载类的字节码做变更，但是这种情况下会有很多的限制，后面会详细说
+还有其他一些小众的功能
+获取所有已经加载过的类
+获取所有已经初始化过的类（执行过 clinit 方法，是上面的一个子集）
+获取某个对象的大小
+将某个 jar 加入到 bootstrap classpath 里作为高优先级被 bootstrapClassloader 加载
+将某个 jar 加入到 classpath 里供 AppClassloard 去加载
+设置某些 native 方法的前缀，主要在查找 native 方法的时候做规则匹配
