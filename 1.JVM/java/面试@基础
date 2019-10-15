@@ -1,0 +1,120 @@
+java基础
+什么是Java虚拟机？为什么Java被称作平台无关语言？
+Java虚拟机是可以执行class文件也就是java字节码的虚拟机进程，Java源文件（不只限于一种语言）被编译字节码文件后就可以被java虚拟机执行，不依赖于平台，只依赖于java虚拟机，每个平台有特定的虚拟机实现，开发者不需要关注具体是什么平台，而重写编写或者编译，实现了平台无关性。
+Java的基础类型有哪些？什么是自动装箱拆箱？
+基本数据类型有：byte/short/int/long/float/double/char/boolean
+每一种基本类型都有对应的包装类型，自动装箱和拆箱是指的基本类型和包装类型之间的转换，包装类型可以当一个对象使用，调用各自的一些方法进行操作
+基本运算符
+|    或 按二进制进行，有一个是1结果为1
+& 于 按二进制进行 两个1结果为1
+^ 异或 按二进制进行 相同为0 不同为1
+>> 有符号右移 每移动一位有*2效果
+>>> 无符号右移
+&& 逻辑与
+|| 逻辑或
+重载和重写
+重载是类的方法名相同而参数列表不同，重写是针对父类或者接口，方法名和参数列表一样
+stringBuilder和stringBuffer区别
+stringBuilder是线程不安全的，效率高
+stringBuffer是线程安全的，效率低
+HashMap和HashTable的区别
+HashMap是非线程安全的，允许存储null值
+HashTable是线程安全类，不允许null值
+ArrayList和LinkedList的区别
+ArrayList是基于索引的数据接口，底层是数组实现，对于遍历查找速度较快
+LinkedList是基于链表的实现的，对于添加删除操作更快，占有更多空间
+讲讲类的实例化顺序，比如父类静态数据，构造函数，字段，子类静态数据，构造函数，字段，当 new 的时候， 他们的执行顺序。
+父类静态代变量、 
+父类静态代码块、 
+子类静态变量、 
+子类静态代码块、
+父类非静态变量（父类实例成员变量）、 
+父类构造函数、 
+子类非静态变量（子类实例成员变量）、 
+子类构造函数。
+https://zhuanlan.zhihu.com/p/21673805
+什么是序列化以及用途，什么时候使用序列化？
+序列化是指把对象转换为字节序列的过程称为对象的序列化；而反序列化是指把字节序列恢复为对象的过程称为对象的反序列化。
+对象的序列化主要有两种用途：
+1）把对象的字节序列永久地保存到硬盘上，通常存放在一个文件中；
+2）在网络上传送对象的字节序列。
+什么时候使用序列化：
+1）对象序列化可以实现分布式对象。主要应用例如：RMI要利用对象序列化运行远程主机上的服务，就像在本地机上运行对象时一样。
+2）java对象序列化不仅保留一个对象的数据，而且递归保存对象引用的每个对象的数据。可以将整个对象层次写入字节流中，可以保存在文件中或在网络连接上传递。利用对象序列化可以进行对象的"深复制"，即复制对象本身及引用的对象本身。序列化一个对象可能得到整个对象序列。
+整数数组按绝对值排序
+非阻塞IO和异步IO的区别
+   NIO核心是selector然后注册channel，可以指定具体的事件，可以使用一个线程来轮询这个selector，不需要为每个通道都起一个线程。
+   异步IO是用的线程池
+equals和==的区别
+   == 判断的是两个对象的内存地址是否相等，而equals是一个方法，可以通过更多的对比条件进行对比，具体的实现有对应的类来选择实现。
+final和finally
+   final是用来修饰类，方法，字段的，代表不可继承、重写、修改的意思，finally是处理逻辑中一定会执行的一段代码，于try成对出现
+常用的集合类有哪些？区别是什么？hashmap和hashtable的区别。哪些是线程安全的哪些不是？
+HashMap几乎可以等价于Hashtable，除了HashMap是非synchronized的，并可以接受null(HashMap可以接受为null的键值(key)和值(value)，而Hashtable则不行)。
+HashMap是非synchronized，而Hashtable是synchronized，这意味着Hashtable是线程安全的，多个线程可以共享一个Hashtable；而如果没有正确的同步的话，多个线程是不能共享HashMap的。Java 5提供了ConcurrentHashMap，它是HashTable的替代，比HashTable的扩展性更好。
+另一个区别是HashMap的迭代器(Iterator)是fail-fast迭代器，而Hashtable的enumerator迭代器不是fail-fast的。所以当有其它线程改变了HashMap的结构（增加或者移除元素），将会抛出ConcurrentModificationException，但迭代器本身的remove()方法移除元素则不会抛出ConcurrentModificationException异常。但这并不是一个一定发生的行为，要看JVM。这条同样也是Enumeration和Iterator的区别。
+由于Hashtable是线程安全的也是synchronized，所以在单线程环境下它比HashMap要慢。如果你不需要同步，只需要单一线程，那么使用HashMap性能要好过Hashtable。
+HashMap不能保证随着时间的推移Map中的元素次序是不变的。
+   hashMap是非线程安全的，可以存null值，比hashtable效率高；
+ Object中的常见的方法。
+   toString(),hashCode(),equals(),wait(),notify(),notifyAll()
+java中的异常体系，异常出现的情况如：ClassNotFound、空指针等
+   ClassNotFound异常是当需要的类加载不成功的情况下会报，空指针异常属于运行时异常
+，当对象为null时会出现
+Java的异常类层次结构
+   Thorwable是所有异常和错误的超类，分两个子类 Error和Exception，Error是错误，代表不可处理的错误，出现Error时不应该尝试处理，jvm会退出
+   Exception是可以处理的异常，可以按需进行处理分两大类异常运行时异常和非运行时异常
+   运行时异常是不受检查异常，只有运行时才可能出现的异常，一般由程序问题引起
+   非运行时异常，程序必须进行处理的异常，抛出或者捕获
+对JDK8的新特性有什么了解
+   lambda表达式
+   接口默认方法和静态方法，接口可以提供方法的默认实现，实现类可以选择需要实现的方法去实现
+   方法引用，语法：类名|实例::new|方法名
+   重复注解，同一位置可以多次出现同一个注解
+   更好的类型推断
+   扩展注解的支持，包括局部变量，泛型类，父类，接口，抛出的异常
+   移除PermGen空间，取代的是metaSpace
+原子类的实现？
+   实现关键是CAS，这个是由cpu指令支持的，然后自旋进行修改来确保修改成功，
+Error、Exception和RuntimeException的区别，作用又是什么？
+   error代表不能处理的错误，不应该尝试解决
+   Exception属于异常，可能是由于编码、环境、参数等引起的错误，有些异常是可以处理的，还能当做流程控制
+   runtimeException运行时异常继承了Exception，是不受检异常，不需要捕获、使用和处理跟Exception一样。
+IO和NIO本质不同，在实际项目使用场景及如何使用？
+   IO是阻塞的，面向流的，NIO是非阻塞的，面向缓冲，
+   多连接少数据时使用NIO，可以方便管理连接
+   少量的连接发送大量数据，IO更合算，不需要复杂的数据判断处理。
+sleep() 和 wait() 有什么区别？
+   sleep()方法是Thread类提供的方法，会使线程休眠指定的时间，不释放已获得的锁。
+   wait()方法是Object类提供的方法，调用前需先获得对象锁，会使线程进入阻塞状态，释放已获得的锁，当其他线程调用notify，notifyAll时才有机会重新执行，获得调用对象的锁才真正从wait返回
+
+
+JAVA 基础
+1、List 和 Set 的区别
+2、HashSet 是如何保证不重复的
+3、HashMap 是线程安全的吗，为什么不是线程安全的（最好画图说明多线程环境下不安全）?
+一旦形成环形数据结构，Node的next节点永远不为空，就会在获取Node时产生死循环
+4、HashMap 的扩容过程
+5、HashMap 1.7 与 1.8 的 区别，说明 1.8 做了哪些优化，如何优化的？
+计算方式 原位置OR原位置+旧容量               hashcode
+转移数据 尾插法 红黑树                       头插法 逆序 环形
+插入与计算时机  扩容前插入后计算             扩容后插入 单独计算
+6、final finally finalize
+7、强引用 、软引用、 弱引用、虚引用
+8、Java反射
+9、Arrays.sort和Collections.sort实现原理解析
+总结，插入排序，快速排序，归并排序三种排序的组合
+至于大过INSERTION_SORT_THRESHOLD（47）的，用一种快速排序(双轴快排)的方法：
+INSERTION_SORT_THRESHOLD为47，发现当要排序的个数小于47个时，采用插入排序
+10、LinkedHashMap的应用
+11、cloneable接口实现原理
+12、异常分类以及处理机制
+13、wait和sleep的区别
+sleep()和wait()方法的最大区别是： 
+　sleep()睡眠时，保持对象锁，仍然占有该锁； 
+　而wait()睡眠时，释放对象锁。 
+　但是wait()和sleep()都可以通过interrupt()方法打断线程的暂停状态，从而使线程立刻抛出InterruptedException（但不建议使用该方法）。
+14、数组在内存中如何分配
+
+
+
