@@ -1,0 +1,26 @@
+###################################################################################
+since1.8
+Field
+
+public static final Integer myfield=0;
+
+属性
+this.clazz = declaringClass;//所属类
+this.name = name;
+this.type = type;//类型
+this.modifiers = modifiers;//访问权限
+this.slot = slot;//插槽
+this.signature = signature;//签名 JVM识别
+this.annotations = annotations;//字段注解@
+private transient FieldRepository genericInfo;// generic info repository; lazily initialized//泛型字段信息存储库
+private FieldAccessor fieldAccessor;// Cached field accessor created without override  unsafe方式读取字段
+private FieldAccessor overrideFieldAccessor;  // Cached field accessor created with override  访问权限被修改
+private Field  root;// 唯一   反射生成的field对象!=  但各自的root==  因为copy方法是创建新的Field
+
+
+Method 
+
+
+Constructor  ？newInstance 修改
+
+

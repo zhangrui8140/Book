@@ -2,7 +2,8 @@
  * Copyright (c) 1997, 2017, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
- *
+ * 设计一个数组结构的存储类
+ * Arrays工具类 
  *
  *
  *
@@ -107,6 +108,7 @@ import sun.misc.SharedSecrets;
 public class ArrayList<E> extends AbstractList<E>
         implements List<E>, RandomAccess, Cloneable, java.io.Serializable
 {
+    //序列化时确定唯一标识类（根据类 方法等生成）序列化到其他相同名称类时 区分出
     private static final long serialVersionUID = 8683452581122892189L;
 
     /**
@@ -116,6 +118,7 @@ public class ArrayList<E> extends AbstractList<E>
 
     /**
      * Shared empty array instance used for empty instances.
+     * 实例共用一个对象 在扩容后重新分配
      */
     private static final Object[] EMPTY_ELEMENTDATA = {};
 
@@ -131,6 +134,7 @@ public class ArrayList<E> extends AbstractList<E>
      * The capacity of the ArrayList is the length of this array buffer. Any
      * empty ArrayList with elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA
      * will be expanded to DEFAULT_CAPACITY when the first element is added.
+     * transient不序列化  序列化数组 里面可能含有空值 采用WriteObject方式去序列化
      */
     transient Object[] elementData; // non-private to simplify nested class access
 

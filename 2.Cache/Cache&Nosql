@@ -112,3 +112,79 @@ redis replication 的核心机制
 用异步方式复制数据到 slave 节点 
 开启 master node 的持久化
 -------------------------------------
+
+########## NETWORK 网络#########
+# bind 127.0.0.1 port 6379  ip 端口
+
+
+######### GENERAL  通用###########
+# daemonize no 守护进程
+# pidfile /var/run/redis_6379.pid  记录了该进程的ID
+防止进程启动多个副本。只有获得pid文件(固定路径固定文件名)写入权限(F_WRLCK)的进程才能正常启动并把自身的PID写入该文件中。其它同一个程序的多余进程则自动退出。
+# loglevel notice 日志级别 notice（生产环境）
+# logfile ""  /var/redis/log/6379.log
+# databases 16
+
+####### SNAPSHOTTING  快照 #######
+# save 900 1  save <时间> <修改次数>  规定时间内 修改次数是否达标
+# dbfilename dump.rdb   存储本地数据库名称
+# dir ./   存储本地数据库目录 /var/redis/data
+
+
+
+########## REPLICATION 主从复制 ##########
+# slaveof <masterip> <masterport> 从服务器
+
+
+####### APPEND ONLY MODE aof持久化 #######
+# appendonly no 
+# appendfilename "appendonly.aof"
+# appendfsync      always   everysec    no
+
+
+      
+
+String:
+    set:设置key
+    get:获取key
+    del:删除key
+    Keys *:获取所有key
+List(值可以相同):
+    rpush:下推
+    lrush:上推
+    lrange:遍历
+    lindex:索引
+    lpop:上弹
+    rpop:下弹
+Set(值唯一):
+    Sadd:添加
+    Srem:删除
+    Smembers:遍历
+    sismember:是否存在
+Hash(key值唯一):
+    hset:赋key value
+    hgetall:获取所有key value
+    hget:获取value
+    hdel:删除
+有序集合zSet(key值唯一):
+    zadd：添加键值(先值后健)
+    zrem:移除
+    zrange:遍历(withscores)
+    zrangebyscore:根据值遍历
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+

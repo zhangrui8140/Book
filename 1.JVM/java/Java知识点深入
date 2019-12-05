@@ -247,3 +247,150 @@ OOM 内存泄漏，什么情况下会出现，如何排查
 
 
 
+基本功
+面向对象的特征
+          Q: 封装、抽象、继承和多态
+
+final, finally, finalize 的区别
+         Q：final
+    方法:不能重载
+        类:不能再派生出新的子类
+    变量：值（不能改变）引用（地址不可修改，引用对象可变）
+         Q：finally 异常 清除操作 必定执行
+         Q:  finalize 
+Object 类中定义	
+整理系统资源或者执行其他清理工作,
+垃圾收集器删除对象之前对这个对象调用的
+类似于C++中的析构函数
+
+int 和 Integer 有什么区别
+Q：int 数值型  Integer 引用型 存储对象引用
+两个非new生成的Integer对象，进行比较时，如果两个变量的值在区间-128到127之间，则比较结果为true，如果两个变量的值不在此区间，则比较结果为false
+
+重载和重写的区别
+              重载 区分参数类型与个数
+             重写 继承与扩展 override
+
+
+抽象类和接口有什么区别
+功能：对事物的抽象 注重类别
+           对行为的抽象 注重操作
+接口:变量默认 public static final   允许静态和默认方法
+
+
+
+说说反射的用途及实现
+Class.forName()
+通过类名调用class属性
+调用实例的getClass()方法
+基本类型的Type属性
+
+性能第一 反射包括了一些动态类型，所以 JVM 无法对这些代码进行优化
+安全限制
+内部暴露
+
+
+说说自定义注解的场景及实现
+          元注解
+  @Retention、@Inherited、@Documented、@Target
+@Retention
+注解的保留位置（枚举RetentionPolicy），RetentionPolicy可选值：
+SOURCE：注解仅存在于源码中，在class字节码文件中不包含
+CLASS：默认的保留策略，注解在class字节码文件中存在，但运行时无法获得
+RUNTIME：注解在class字节码文件中存在，在运行时可以通过反射获取到
+@Inherited
+声明子类可以继承此注解，如果一个类A使用此注解，则类A的子类也继承此注解
+@Documented
+声明注解能够被javadoc等识别（下面自定义注解处会有例子做介绍，点击查看）
+@Target
+用来声明注解范围（枚举ElementType），ElementType可选值：
+TYPE：接口、类、枚举、注解
+FIELD：字段、枚举的常量
+METHOD：方法
+PARAMETER：方法参数
+CONSTRUCTOR：构造函数
+LOCAL_VARIABLE：局部变量
+ANNOTATION_TYPE：注解
+PACKAGE：包
+ 自定义注解  标注 说明 
+ @interface自定义注解
+        
+
+HTTP 请求的 GET 与 POST 方式的区别
+GET
+使用GET方法时，查询字符串（键值对）被附加在URL地址后面一起发送到服务器：
+/test/demo_form.jsp?name1=value1&name2=value2
+特点：
+GET请求能够被缓存
+GET请求会保存在浏览器的浏览记录中
+以GET请求的URL能够保存为浏览器书签
+GET请求有长度限制
+GET请求主要用以获取数据
+POST数据请求更新
+POST请求不能被缓存下来
+POST请求不会保存在浏览器浏览记录中
+以POST请求的URL无法保存为浏览器书签
+POST请求没有长度限制
+缓存
+HTTP缓存的基本目的就是使应用执行的更快，更易扩展，但是HTTP缓存通常只适用于idempotent request（可以理解为查询请求，也就是不更新服务端数据的请求），这也就导致了在HTTP的世界里，一般都是对Get请求做缓存，Post请求很少有缓存。
+get多用来直接获取数据，不修改数据，主要目的就是DB的search语句的感觉。用缓存(有个代理服务器的概念)的目的就是查db的速度变快。
+post则是发送数据到服务器端去存储。类似db里的update delete和insert语句的感觉。更新db的意思。数据必须放在数据库，所以一般都得去访问服务器端。
+
+session 与 cookie 区别
+ 1、Cookie和Session都是会话技术，Cookie是运行在客户端，Session是运行在服务器端。
+ 2、Cookie有大小限制以及浏览器在存cookie的个数也有限制，Session是没有大小限制和服务器的内存大小有关。
+ 3、Cookie有安全隐患，通过拦截或本地文件找得到你的cookie后可以进行攻击。
+ 4、Session是保存在服务器端上会存在一段时间才会消失，如果session过多会增加服务器的压力。
+
+session 分布式处理
+                访问指定服务器 粘性session
+  服务器session复制   优化方案 terracotta实现session复制
+   session共享机制  redis memcached
+session持久化到数据库
+
+JDBC 流程
+1.注册驱动
+方式一：Class.forName(“com.MySQL.jdbc.Driver”);
+　　推荐这种方式，不会对具体的驱动类产生依赖。
+　　方式二：DriverManager.registerDriver(com.mysql.jdbc.Driver);
+　　会造成DriverManager中产生两个一样的驱动，并会对具体的驱动类产生依赖。
+2.建立连接
+3.创建执行SQL语句的statement
+4.处理执行结果(ResultSet)
+5.释放资源
+MVC 设计思想
+
+equals 与 == 的区别
+
+“==”运用在基本数据类型的时候，通过比较它们实际的值来判断是否相同；而用于比较引用数据类型的时候，则是比较俩个引用的地址是否相等，也就是是否指向一个对象。
+    equals方法是java.lang.Object的方法，也就是所有的java类都会有的方法。它可以被程序员覆盖重写，通过自定义的方式来判断俩个对象是否相等。对于字符串java.lang.String类来说，它的equals方法用来比较字符串的字符序列是否完全相等。
+SQL注入
+把SQL命令插入到Web表单的输入域或页面请求的查询字符串，
+欺骗服务器执行恶意的SQL命令
+      阻止：  加密  校验 过滤
+
+集合
+List 和 Set 区别
+List 和 Map 区别
+Arraylist 与 LinkedList 区别
+ArrayList 与 Vector 区别
+HashMap 和 Hashtable 的区别
+Hashtable 不接受null值 线程同步 扩容 2n+1 默认11 
+取模哈希的结果会更加均匀
+hashcode%cap
+HashMap 扩容 2n 默认16
+那么我们可以直接使用位运算来得到结果，效率要大大高于做除法。所以从hash计算的效率上，又是HashMap更胜一筹
+hashcode&(length-1)
+HashSet 和 HashMap 区别
+,通过负载因子(load factor)来决定何时对散列表进行再
+散列.例如:如果负载因子是0.75,当散列表中已经有75%的位置已经放满,
+那么将进行散列.
+如果两个对象的HashCode相同，不代表两个对象就相同，只能说明这两个对象在散列存储结构中，存放于同一个位置
+HashMap 和 ConcurrentHashMap 的区别
+HashMap 的工作原理及代码实现
+ConcurrentHashMap 的工作原理及代码实现
+
+
+
+
+
