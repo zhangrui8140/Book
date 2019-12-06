@@ -138,6 +138,23 @@ info
 
 
 
+linux 作业系统 ：系统呼叫 + 核心
+相容分时系统(Compatible Time-Sharing System, CTSS)』，它可以让大型主机透过提供数个终端机(terminal)以连线进入主机
+1965 Multics计划   
+Ken Thompson （Unics ） -> + Ritchie C -> unix 
+ 	高阶的C语言与硬体的相关性就没有这么大了！所以，这个改变也使得Unix很容易被移植到不同的机器上面喔！
+Bill Joy      BSD  SUN
+System V  个人电脑Unix系统
+版权纠纷   Andrew Tanenbaum      Minix
+GUN计划  gcc bash
+gun工具 + minix    386 多工测试  虚拟团队 ->linux
+软体 系统
+
+
+
+   
+    
+
 
 
 
