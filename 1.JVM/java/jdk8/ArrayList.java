@@ -1,16 +1,17 @@
 /*
  * Copyright (c) 1997, 2017, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *
+ * 20191209
  * 设计一个数组结构的存储类
  * Arrays工具类 
- *
- *
- *
- *
- *
- *
- *
+ * 实现 RandomAccess, Cloneable, java.io.Serializable
+
+ * 20191210 测试
+ * batchRemove
+ * Serializable
+ * removeIf
+ * replaceAll
+ * sort
  *
  *
  *
