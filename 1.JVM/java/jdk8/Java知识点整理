@@ -1,0 +1,478 @@
+修改记录
+Collection AbstractCollection ...
+20191209 List  ArrayList AbstractSequentialList LinkedList ...
+20191217 Queue PriorityQueue BlockingQueue  PriorityBlockingQueue  ... ...
+########################################################################################################
+是什么 为什么（区别） 怎么使用 场景
+-----------------------Lang-----------------------
+annotation
+invoke
+ref
+reflect
+module(since 9)
+
+-----------------------nio、io、net-----------------------
+channels
+charset
+file
+Serialization
+
+-----------------------util-----------------------
+Collection
+1.数组
+List  AbstractList ArrayList    
+Queue PriorityQueue 二叉树
+
+2.链表
+AbstractSequentialList LinkedList
+------------------
+
+
+concurrent lock
+Thread
+stream
+regex
+jar
+zip
+logging
+prefs
+function
+spi
+------------------
+
+########################################################################################################
+
+-----------------------math-----------------------
+
+-----------------------security-----------------------
+
+-----------------------text-----------------------
+
+-----------------------time-----------------------
+########################################################################################################
+@xml
+@rmi
+@sql
+@JNI(Java Native Interface)
+@i18n
+@instrument(javaagent)
+
+@management
+
+
+TCP，UDP 区别，为什么可靠和不可靠
+一次 HTTP 请求的全过程，包括域名解析、定位主机等
+TCP 三次握手
+BIO、NIO（如何实现的）、AIO
+
+
+基本功
+面向对象的特征
+          Q: 封装、抽象、继承和多态
+
+final, finally, finalize 的区别
+         Q：final
+    方法:不能重载
+        类:不能再派生出新的子类
+    变量：值（不能改变）引用（地址不可修改，引用对象可变）
+         Q：finally 异常 清除操作 必定执行
+         Q:  finalize 
+Object 类中定义	
+整理系统资源或者执行其他清理工作,
+垃圾收集器删除对象之前对这个对象调用的
+类似于C++中的析构函数
+
+int 和 Integer 有什么区别
+Q：int 数值型  Integer 引用型 存储对象引用
+两个非new生成的Integer对象，进行比较时，如果两个变量的值在区间-128到127之间，则比较结果为true，如果两个变量的值不在此区间，则比较结果为false
+
+重载和重写的区别
+              重载 区分参数类型与个数
+             重写 继承与扩展 override
+
+
+抽象类和接口有什么区别
+功能：对事物的抽象 注重类别
+           对行为的抽象 注重操作
+接口:变量默认 public static final   允许静态和默认方法
+
+
+
+说说反射的用途及实现
+Class.forName()
+通过类名调用class属性
+调用实例的getClass()方法
+基本类型的Type属性
+
+性能第一 反射包括了一些动态类型，所以 JVM 无法对这些代码进行优化
+安全限制
+内部暴露
+
+
+说说自定义注解的场景及实现
+          元注解
+  @Retention、@Inherited、@Documented、@Target
+@Retention
+注解的保留位置（枚举RetentionPolicy），RetentionPolicy可选值：
+SOURCE：注解仅存在于源码中，在class字节码文件中不包含
+CLASS：默认的保留策略，注解在class字节码文件中存在，但运行时无法获得
+RUNTIME：注解在class字节码文件中存在，在运行时可以通过反射获取到
+@Inherited
+声明子类可以继承此注解，如果一个类A使用此注解，则类A的子类也继承此注解
+@Documented
+声明注解能够被javadoc等识别（下面自定义注解处会有例子做介绍，点击查看）
+@Target
+用来声明注解范围（枚举ElementType），ElementType可选值：
+TYPE：接口、类、枚举、注解
+FIELD：字段、枚举的常量
+METHOD：方法
+PARAMETER：方法参数
+CONSTRUCTOR：构造函数
+LOCAL_VARIABLE：局部变量
+ANNOTATION_TYPE：注解
+PACKAGE：包
+ 自定义注解  标注 说明 
+ @interface自定义注解
+        
+
+HTTP 请求的 GET 与 POST 方式的区别
+GET
+使用GET方法时，查询字符串（键值对）被附加在URL地址后面一起发送到服务器：
+/test/demo_form.jsp?name1=value1&name2=value2
+特点：
+GET请求能够被缓存
+GET请求会保存在浏览器的浏览记录中
+以GET请求的URL能够保存为浏览器书签
+GET请求有长度限制
+GET请求主要用以获取数据
+POST数据请求更新
+POST请求不能被缓存下来
+POST请求不会保存在浏览器浏览记录中
+以POST请求的URL无法保存为浏览器书签
+POST请求没有长度限制
+缓存
+HTTP缓存的基本目的就是使应用执行的更快，更易扩展，但是HTTP缓存通常只适用于idempotent request（可以理解为查询请求，也就是不更新服务端数据的请求），这也就导致了在HTTP的世界里，一般都是对Get请求做缓存，Post请求很少有缓存。
+get多用来直接获取数据，不修改数据，主要目的就是DB的search语句的感觉。用缓存(有个代理服务器的概念)的目的就是查db的速度变快。
+post则是发送数据到服务器端去存储。类似db里的update delete和insert语句的感觉。更新db的意思。数据必须放在数据库，所以一般都得去访问服务器端。
+
+session 与 cookie 区别
+ 1、Cookie和Session都是会话技术，Cookie是运行在客户端，Session是运行在服务器端。
+ 2、Cookie有大小限制以及浏览器在存cookie的个数也有限制，Session是没有大小限制和服务器的内存大小有关。
+ 3、Cookie有安全隐患，通过拦截或本地文件找得到你的cookie后可以进行攻击。
+ 4、Session是保存在服务器端上会存在一段时间才会消失，如果session过多会增加服务器的压力。
+
+session 分布式处理
+                访问指定服务器 粘性session
+  服务器session复制   优化方案 terracotta实现session复制
+   session共享机制  redis memcached
+session持久化到数据库
+
+JDBC 流程
+1.注册驱动
+方式一：Class.forName(“com.MySQL.jdbc.Driver”);
+　　推荐这种方式，不会对具体的驱动类产生依赖。
+　　方式二：DriverManager.registerDriver(com.mysql.jdbc.Driver);
+　　会造成DriverManager中产生两个一样的驱动，并会对具体的驱动类产生依赖。
+2.建立连接
+3.创建执行SQL语句的statement
+4.处理执行结果(ResultSet)
+5.释放资源
+MVC 设计思想
+
+equals 与 == 的区别
+
+“==”运用在基本数据类型的时候，通过比较它们实际的值来判断是否相同；而用于比较引用数据类型的时候，则是比较俩个引用的地址是否相等，也就是是否指向一个对象。
+    equals方法是java.lang.Object的方法，也就是所有的java类都会有的方法。它可以被程序员覆盖重写，通过自定义的方式来判断俩个对象是否相等。对于字符串java.lang.String类来说，它的equals方法用来比较字符串的字符序列是否完全相等。
+SQL注入
+把SQL命令插入到Web表单的输入域或页面请求的查询字符串，
+欺骗服务器执行恶意的SQL命令
+      阻止：  加密  校验 过滤
+
+集合
+List 和 Set 区别
+List 和 Map 区别
+Arraylist 与 LinkedList 区别
+ArrayList 与 Vector 区别
+HashMap 和 Hashtable 的区别
+Hashtable 不接受null值 线程同步 扩容 2n+1 默认11 
+取模哈希的结果会更加均匀
+hashcode%cap
+HashMap 扩容 2n 默认16
+那么我们可以直接使用位运算来得到结果，效率要大大高于做除法。所以从hash计算的效率上，又是HashMap更胜一筹
+hashcode&(length-1)
+HashSet 和 HashMap 区别
+,通过负载因子(load factor)来决定何时对散列表进行再
+散列.例如:如果负载因子是0.75,当散列表中已经有75%的位置已经放满,
+那么将进行散列.
+如果两个对象的HashCode相同，不代表两个对象就相同，只能说明这两个对象在散列存储结构中，存放于同一个位置
+HashMap 和 ConcurrentHashMap 的区别
+HashMap 的工作原理及代码实现
+ConcurrentHashMap 的工作原理及代码实现
+
+
+
+
+多态的原理
+http 和 https 的区别，tcp 握手过程
+jvm 垃圾回收算法手写冒泡
+手写单例包括多线程下
+数据库的悲观锁和乐观锁应用场景。
+海量数据过滤，黑名单过滤一个 url。
+说一个你对 JVM 优化的实际案例，包括实际步骤和方法
+5.通过反射，谈到了方法区，然后，类加载机制？
+8.JVM 的调优参数？（-Xmn，-Xms 等具体参数设置）
+13.TCP 三次握手，为什么三次握手？
+14.JVM 内存分区？（主存，工作内存，堆，栈。。。。）
+15.讲一下 GC？
+16.为什么要用老年代和新生代？
+17.新生代进入老生代的情况？
+18.新生代的分区？
+java 内存模型
+1）讲一下 JVM
+2）讲一下 JVM 的分代回收以及具体算法
+3）将一下 JVM 的垃圾收集器，G1 和 CMS 有啥区别？
+4）讲一下一个变量从产生到结束所经历的过程，讲一下字符串常量的过程？
+8）Integer 和 int 有啥区别，integer 中有哪些特殊的函数？
+2，网络方面有 osi 七层，tcp/ip 五层，分别有哪些协议及作用
+3，爬虫用的什么数据结构
+4、tcp 的流量控制和拥塞控制
+6，jvm 的垃圾回收机制和垃圾收集器
+给你 50 亿行字符串，机器 4G 内存（只能一台机器），找出重复次数最多的那行字符串？
+（以行为单位，每行不超过 10 个字符）
+设计一个算法，实现两个 10g 大文件在 10m 的内存中将两个大文件中重复的放进第三个
+文件
+12. JVM，垃圾回收机制，内存划分等
+23. 两个 10G 的文件，里面是一些 url，内存只有 1G，如何将这两个文件合并，找到相同
+的 url？
+ jvm 性能调优都做了什么
+. JVM，垃圾回收机制，内存划分等
+. SQL 优化，常用的索引？
+object 类你知道的方法
+hashcode 和 equals
+你重写过 hashcode 和 equals 么，要注意什么
+Java 的内存模型，垃圾回收
+线程池的参数
+每个参数解释一遍
+然后面试官设置了每个参数，给了是个线程，让描述出完整的线程池执行的流程
+Nio 和 IO 有什么区别
+Nio 和 aio 的区别
+. Java 中的多态
+. 为什么要同时重写 hashcode 和 equals
+. Hashmap 的原理
+. Hashmap 如何变线程安全，每种方式的优缺点
+. 垃圾回收机制
+. Jvm 的参数你知道的说一下
+. 设计模式了解的说一下啊
+. 手撕一个单例模式
+算法题目
+. 手撕算法：反转单链表
+. 手撕算法：实现类似微博子结构的数据结构，输入一系列父子关系，输
+出一个类似微博评论的父子结构图
+. 手写 java 多线程
+. 手写 java 的 soeket 编程，服务端和客户端
+. 手撕算法： 爬楼梯，写出状态转移方程
+ 服务器如何负载均衡，有哪些算法，哪个比较好，一致性哈希原理，怎
+么避免 DDOS 攻击请求打到少数机器。
+. TCP 连接中的三次握手和四次挥手，四次挥手的最后一个 ack 的作用是
+什么，为什么要 time wait，为什么是 2msl。
+1、从 ConcurrentHashMap 一路问到锁&锁优化->LongAdder->伪共享->缓存行填充->cas 等诸多技术细节；
+
+HashMap ConcurrentHashMap Hashtable 栈和队列
+ArrayList linkedlist ArrayList 是否会越界 hashset
+
+线程池 Runnable Callable Thread 什么情况下使用 Runnable 和 Thread 创建线程，Runnable 和 Callable 的区别
+线程方法中的异常如何处理，副线程可以捕获到吗
+
+
+快速排序说一下过程
+红黑树，为什么允许局部不平衡
+
+
+synchronized volatile 和锁的区别，什么情况下使用 synchronized 和 ReentrantLock
+
+
+
+@@Java 线程间怎么实现同步，notify()与 notifyAll()的区别
+
+@@排序算法的复杂度，快速排序非递归实现。
+
+@@list set map 底层使用什么实现的有哪些典型实现
+
+@@hashmap 扩容是怎么扩容的，为什么是 2 的幂
+
+@@concurrenthashmap 为什么线程安全，采用了什么措施应对高并发
+
+@@线程池的参数有什么意义
+
+@@6.synchronized 的实现原理？Volatile 能保证原子性吗？为什么？
+
+@@7.hashmap 和 concurrenthashmap 的 size 方法怎么实现的
+
+@@9.线程池优点，参数，如果我想实现 newSingleThreadPoll，应该怎么配置，构造方法传什么
+
+@@12.线程的五态？转化过程？
+
+@@变着法的问了一大堆线程池的知识 （主要考对应的参数）
+
+@@lock 和 synchronized 的区别
+
+@@reentrantlock 的实现
+
+@@hashmap 和 concurrenthashmap
+
+@@线程安全（阻塞同步，非阻塞同步，无同步）
+
+@@线程池的设计
+
+@@线程池如何做负载均衡
+
+@@如何实现线程调度算法
+
+@@将一下线程安全问题产生的原因？
+
+@@讲一下乐观锁和悲观锁
+
+@@乐观锁是怎么保证一致性的
+
+@@问了冒泡排序，快排，和归并排序及优缺点和优化
+
+@@jdk1.8 concurrenthashmap 的新的特性，有没有看过源码
+
+@@threadlocal 了解吗
+
+@@说一下 hashcode 的作用？HashMap 的底层实现？HashMap 和 HashTable 的区别
+
+@@说一下 concurrentHashMap 和 hashTable 在性能上的区别？以及这种差异形成的原因
+
+@@讲一下堆以及堆排序
+
+@@说一下 B+tree 和二叉搜索树的区别？说一下二叉搜索树和 AVL 树、红黑树之间的差别
+
+@@给你两个文件（字符串形式的）如何找出他们之间的不同地方？
+
+@@你刚刚说的能怎么优化？
+
+@@快速排序的平均复杂多少？最坏情况是什么？（这个题估计就是缓和一下尴尬的气氛）
+
+@@ ArrayList 和 LinkedList 底层
+
+@@ HashMap 及线程安全的 ConcurrentHashMap，以及各自优劣势
+
+@@ Java 如何实现线程安全
+
+@@ Synchronized 和 Lock 哪个更好？
+
+@@ HashMap 中的 get()方法是如何实现的？
+
+@@ HashMap 可以用在哪些场景？
+
+ @@多线程状态图，状态如何流转？
+
+@@ 死锁，死锁原因
+
+@@ 页锁、乐观锁、悲观锁？
+
+@@乐观锁如何保证线程安全？
+
+@@ 用过线程池吗，对应的好处，如何用？
+
+@@ 1000 个多并发线程，10 台机器，每台机器 4 核的，设计线程池大小。
+
+@@ 代码题：两个有序数组，数组中存在重复数字，合并成一个有序数组，去除重复数字。
+
+@@ArrayList 和 LinkedList 底层
+
+@@ HashMap 及线程安全的 ConcurrentHashMap，以及各自优劣势
+
+@@ Java 如何实现线程安全
+
+@@ Synchronized 和 Lock 哪个更好？
+
+@@ HashMap 中的 get()方法是如何实现的？
+
+@@HashMap 可以用在哪些场景？
+
+@@Hashmap 的原理，增删的情况后端数据结构如何位移
+
+@@hashmap 容量为什么是 2 的幂次
+
+@@hashset 的源码
+
+
+介绍你实践的性能优化案例，以及你的优化思路
+垃圾回收算法
+JVM 的对象分配在哪个区，Class 对象分配在哪个区
+Java 会出现内存溢出吗？什么情况下会出现？
+双亲委派模型，为什么这样做？
+对象什么情况下进入老年代？
+OOM 内存泄漏，什么情况下会出现，如何排查
+
+1.关键字的应用（应用领域、访问范围、作用）
+访问控制
+修饰词 本类  同一个包的类  继承类 其他类
+private     √ × × ×
+package（默认） √ √ × ×
+protected   √ √ √ ×
+public      √ √ √ √  
+----------------------------------------
+volatile 易失
+transient 短暂  串行化不序列化 临时处理
+----------------------------------------
+final    终止 类不可继承 方法不可修改  变量初始化地址不可变 
+finally  异常捕获后结尾操作
+finalize GC 概率性处理  建议处理释放资源
+
+
+1.RetentionPolicy  source(编译处理) class（classfile中） runtime（vm find）
+
+2.AnnotatedElement 获取当前element的annotation
+
+3.AccessibleObject 继承 AnnotatedElement  获取安全性
+
+4.member
+modifers:
+  PUBLIC: 1
+  PRIVATE: 2
+  PROTECTED: 4
+  STATIC: 8
+  FINAL: 16
+  SYNCHRONIZED: 32
+  VOLATILE: 64
+  TRANSIENT: 128
+  NATIVE: 256
+  INTERFACE: 512
+  ABSTRACT: 1024
+  STRICT: 2048
+Synthetic:
+  编译器为了方便内部类的私有成员被外部类引用，生成了一个get方法，这可以被理解为一个trick，绕开了private成员变量的限制
+5.field  interface 或者 class 的 (static) field or an instance field
+
+
+
+AccessibleObject
+###################################################################################
+since1.8
+Field
+
+public static final Integer myfield=0;
+
+属性
+this.clazz = declaringClass;//所属类
+this.name = name;
+this.type = type;//类型
+this.modifiers = modifiers;//访问权限
+this.slot = slot;//插槽
+this.signature = signature;//签名 JVM识别
+this.annotations = annotations;//字段注解@
+private transient FieldRepository genericInfo;// generic info repository; lazily initialized//泛型字段信息存储库
+private FieldAccessor fieldAccessor;// Cached field accessor created without override  unsafe方式读取字段
+private FieldAccessor overrideFieldAccessor;  // Cached field accessor created with override  访问权限被修改
+private Field  root;// 唯一   反射生成的field对象!=  但各自的root==  因为copy方法是创建新的Field
+
+
+Method 
+
+
+Constructor  ？newInstance 修改
+
+
